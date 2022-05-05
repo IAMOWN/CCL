@@ -52,11 +52,11 @@ class UserUpdateForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super(UserUpdateForm, self).clean()
 
-        email_count = User.objects.filter(email=cleaned_data.get('email')).count()
-        if email_count > 1:
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
             self.add_error(
                 'email',
-                'That email address is already associated with a Whurthy account. Please use another email address.',
+                'That email address is already associated with an account. Please use another email address.',
             )
         return self.cleaned_data
 

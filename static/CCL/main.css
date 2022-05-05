@@ -178,10 +178,22 @@ a.text-CCL-Gold:hover, a.text-CCL-Gold:focus {
 .nav-item {
     padding: 0 9px;
 }
-.navbar-light .navbar-nav .nav-link:hover,
-.navbar-light .navbar-nav .nav-link:focus {
+.navbar-light .navbar-nav,
+.navbar-light .navbar-nav  {
     color: #E0E0E0;
 }
+.nav-link:hover, nav-link:focus {
+    color:#97682D;
+}
+.nav-link-gold {
+    color: #FFF;
+    text-decoration: none;
+}
+.nav-link-gold:hover, .nav-link-gold:focus {
+    color: #97682D !important;
+    text-decoration: none;
+}
+
 .footer-nav {
     color: #FFF;
 }
@@ -219,6 +231,7 @@ a.text-CCL-Gold:hover, a.text-CCL-Gold:focus {
     background-color: #6EC1E4
 }
 
+
 /*------------------------------------
 - Masthead
 ------------------------------------*/
@@ -232,100 +245,3 @@ a.text-CCL-Gold:hover, a.text-CCL-Gold:focus {
     background-image: url('https://django-whurthy.s3.us-west-1.amazonaws.com/whurthy-static/Synthesis+of+Light+Header.jpg');
 }
 
-/*------------------------------------
-- Layout
-------------------------------------*/
-.content-section {
-  background: #ffffff;
-  padding: 10px 20px;
-  border: 1px solid #dddddd;
-  border-radius: 3px;
-  margin-bottom: 20px;
-}
-
-
-.article-title {
-  color: #444444;
-}
-
-a.article-title:hover {
-  color: #97682D;
-  text-decoration: none;
-}
-
-.article-content {
-  white-space: pre-line;
-}
-
-.article-img {
-  height: 65px;
-  width: 65px;
-  margin-right: 16px;
-}
-
-.article-metadata {
-  padding-bottom: 1px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid #e3e3e3
-}
-
-.article-metadata a:hover {
-  color: #333;
-  text-decoration: none;
-}
-
-.article-svg {
-  width: 25px;
-  height: 25px;
-  vertical-align: middle;
-}
-
-.account-img {
-  height: 125px;
-  width: 125px;
-  margin-right: 20px;
-  margin-bottom: 16px;
-}
-
-.account-heading {
-  font-size: 2.5rem;
-}
-
-.align-picture-right {
-    float: right;
-}
-
-/* Alert windows */
-.alert-section {
-    background: #f8d7da;
-    padding: 10px 20px;
-    border: 1px solid #dddddd;
-    border-radius: 3px;
-    margin-bottom: 20px;
-}
-
-.delete-link {
-    text-decoration: none;
-    font-weight: 900;
-    color: #bd2130;
-    font-size: 22px;
-    line-height: 0;
-}
-
-/* Forms */
-.banner-grid-margin-lr {
-    margin: 0 1px;
-}
-
-/* Layout & Padding */
-.row1 {
-    background-color: #fafafa;
-}
-.row2 {
-    background-color: #FFFFFF;
-}
-
-.booking-row {
-    /*border-radius: 0 0 3px 3px;*/
-    border-radius: 3px;
-}

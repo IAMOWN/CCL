@@ -9,7 +9,6 @@ def get_current_year():
 
 # ####################### BASIC VIEWS #######################
 def home(request):
-    # DONE Rebuild Home page
     if request.user.is_authenticated:
         context = {
             'title': 'Cosmic Christ Love',

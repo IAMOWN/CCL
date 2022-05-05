@@ -44,7 +44,7 @@
 {#        <nav class="navbar navbar-expand-md navbar-dark fixed-top">#}
             <div class="container">
                 <!-- Navbar Logo -->
-                <a class="navbar-brand text-CCL-Gold" href="{% url 'home' %}">Cosmic Christ Love</a>
+                <a class="navbar-brand text-CCL-Gold pt-3" href="{% url 'home' %}">Cosmic Christ Love</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -53,8 +53,8 @@
                     <!-- Navbar Left Side -->
                     <div class="navbar-nav">
                         {% if user.is_authenticated %}
-                        <li class="dropdown pe-2">
-                            <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="dropdown pe-4 pt-1">
+                            <a class="nav-link-gold dropdown-toggle navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Library
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -70,8 +70,8 @@
                                 <a class="dropdown-item" href="#">Cosmic Reviews</a>
                             </div>
                         </li>
-                        <li class="dropdown">
-                            <a class="nav-link dropdown-toggle navbarDropdownMenuLink pe-2" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="dropdown pt-1 pe-4">
+                            <a class="nav-link-gold dropdown-toggle navbarDropdownMenuLink pe-2" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Events
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -82,9 +82,9 @@
                                 <a class="dropdown-item" href="#">My Cancelled Events</a>
                             </div>
                         </li>
-                        <li class="dropdown pe-2">
-                            <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Curriculum
+                        <li class="dropdown pe-4 pt-1">
+                            <a class="nav-link-gold dropdown-toggle navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Education
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="#">Courses</a>
@@ -92,34 +92,36 @@
                                 <a class="dropdown-item" href="#">Proposal</a>
                             </div>
                         </li>
-                        <li class="pe-2">
-                            <a class="nav-link" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="pe-4 pt-1">
+                            <a class="nav-link-gold" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Discussion
                             </a>
                         </li>
-                        <li class="dropdown pe-2">
-                            <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="dropdown pe-4 pt-1">
+                            <a class="nav-link-gold  dropdown-toggle navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Operations
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Circles/Spheres</a>
+                                <a class="dropdown-item" href="#">Service Groups</a>
+                                <a class="dropdown-item" href="#">Objectives</a>
                                 <a class="dropdown-item" href="#">Tasks</a>
                                 <a class="dropdown-item" href="#">Dashboard</a>
+                                <a class="dropdown-item" href="{% url "admin:index" %}">Back-Office Admin</a>
                             </div>
                         </li>
-                        <li class="dropdown pe-2">
-                            <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="{% url 'profile' %}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="dropdown pe-4 pt-1">
+                            <a class="nav-link-gold dropdown-toggle navbarDropdownMenuLink" href="{% url 'profile' %}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               My Account
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
                                 <a class="dropdown-item" href="#">Ask A Question</a>
-                                <a class="dropdown-item" href="{% url 'password-reset' %}">Reset Password</a>
+                                <a class="dropdown-item" href="{% url 'password_reset' %}">Reset Password</a>
                             </div>
                         </li>
                         {% else %}
-                        <li class="dropdown pe-2">
-                            <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="dropdown pe-4 pt-1">
+                            <a class="nav-link-gold dropdown-toggle navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Library
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -135,18 +137,23 @@
                                 <a class="dropdown-item" href="#">Cosmic Reviews</a>
                             </div>
                         </li>
+                        <li class="pe-2">
+                            <a class="nav-link" href="{% url 'register' %}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Register
+                            </a>
+                        </li>
                         {% endif %}
 {#                        <a class="nav-item nav-link" href="{% url 'about' %}">About</a>#}
                     </div>
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav ms-auto">
                         {% if user.is_staff %}
-                            <span class="ps-2"><a class="nav-link d-none d-xl-block text-decoration-none" href="{% url 'profile' %}">Search</a></span>
+                            <span class="ps-2"><a class="nav-link d-none d-xl-block text-decoration-none" href="#">Search</a></span>
                             <a class="nav-link d-xl-none" href="#">Search</a>
                             <span class="ps-2"><a class="nav-link d-none d-xl-block text-decoration-none" href="{% url 'logout' %}">Logout</a></span>
                             <a class="nav-link d-xl-none" href="{% url 'logout' %}">Logout</a>
                         {% elif user.is_authenticated %}
-                            <span class="ps-2"><a class="nav-link d-none d-xl-block text-decoration-none" href="{% url 'profile' %}">Search</a></span>
+                            <span class="ps-2"><a class="nav-link d-none d-xl-block text-decoration-none" href="#">Search</a></span>
                             <a class="nav-link d-xl-none" href="#">Search</a>
                             <span class="ps-2"><a class="nav-link d-none d-xl-block text-decoration-none" href="{% url 'logout' %}">Logout</a></span>
                             <a class="nav-link d-xl-none" href="{% url 'logout' %}">Logout</a>
@@ -155,8 +162,6 @@
                             <a class="nav-link d-xl-none" href="#">Search</a>
                             <span class="ps-2"><a class="nav-link d-none d-xl-block text-decoration-none" href="{% url 'login' %}">Log In</a></span>
                             <a class="nav-link d-xl-none" href="{% url 'login' %}">Sign In</a>
-                            <span class="ps-2"><a class="nav-link d-none d-xl-block text-decoration-none" href="{% url 'register' %}">Register</a></span>
-                            <a class="nav-link d-xl-none" href="{% url 'register' %}">Register</a>
                         {% endif %}
                     </div>
                 </div>
@@ -186,13 +191,13 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0"></div>
                 <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                    <a class="nav-item nav-link footer-nav" href="#">Contact</a>
+                    <a class="nav-item nav-link footer-nav nav-link-gold" href="#">Contact</a>
                 </div>
                 <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                    <a class="nav-item nav-link footer-nav" href="#">Donation</a>
+                    <a class="nav-item nav-link footer-nav nav-link-gold" href="#">Donation</a>
                 </div>
                 <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                    <a class="nav-item nav-link footer-nav" href="#">Newsletter subscription</a>
+                    <a class="nav-item nav-link footer-nav nav-link-gold" href="#">Newsletter subscription</a>
                 </div>
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0"></div>
             </div>

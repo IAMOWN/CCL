@@ -1,6 +1,7 @@
 from datetime import datetime, timezone
 
 from django.shortcuts import render, redirect
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -12,15 +13,17 @@ from django.views.generic import (
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from .models import Profile
 
-from users.models import (
-    User,
-)
+
+# ####################### CONSTANTS #######################
+BASE_URL = settings.DOMAIN
 
 
+# ####################### DATE LOGIC #######################
 def get_current_year():
     return datetime.now(tz=timezone.utc).year
 
 
+# ####################### BASIC VIEWS #######################
 def register(request):
     if request.method == 'POST':
         user_form = UserRegisterForm(request.POST, prefix='user')
@@ -123,18 +126,7 @@ class ProfileDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
     def get_context_data(self, *args, **kwargs):
         context = super(ProfileDetailView, self).get_context_data(**kwargs)
         context['year'] = get_current_year()
-        context['title'] = 'Whurthy Profile'
-        context['profile'] = Profile.objects.get(id=self.kwargs["pk"])
-        # DONE Add in service tickets for customer
-        user_obj = User.objects.get(id=self.kwargs['user_id'])
-        context['event_bookings'] = EventBooking.objects\
-            .filter(event_booked_by=user_obj.id)\
-            .order_by('-event_booked')
-        context['user_support_tickets'] = Support.objects\
-            .filter(user_id=self.kwargs["user_id"]).order_by('-date_created')
-        # customer = User.objects.get(user_id=self.kwargs["pk"])
-        context['user_id'] = self.kwargs['user_id']
-        context['wait_list'] = WaitList.objects.filter(wait_list_entry_booked_by=(User.objects.get(id=self.kwargs["user_id"])))
+        context['title'] = 'CCL Profile'
 
         return context
 
