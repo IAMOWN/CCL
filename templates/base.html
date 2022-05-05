@@ -25,8 +25,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Cinzel+Decorative&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel&family=Cinzel+Decorative:wght@400&display=swap" rel="stylesheet">
     <!-- DateTimePicker -->
     {% load bootstrap4 %}
     {% bootstrap_javascript jquery='full' %}
@@ -39,12 +38,13 @@
     {% block script_header %}{% endblock %}
 
 </head>
-<body>
+<body class="masthead">
     <header class="site-header">
-        <nav class="navbar navbar-expand-md navbar-dark bg-BlueGray fixed-top">
+        <nav class="navbar navbar-expand-md navbar-dark">
+{#        <nav class="navbar navbar-expand-md navbar-dark fixed-top">#}
             <div class="container">
                 <!-- Navbar Logo -->
-                <a class="navbar-brand mr-4" href="{% url 'home' %}"><strong>Cosmic Christ Love</strong></a>
+                <a class="navbar-brand text-CCL-Gold" href="{% url 'home' %}">Cosmic Christ Love</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -52,9 +52,26 @@
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <!-- Navbar Left Side -->
                     <div class="navbar-nav">
-                        {% if not user.is_staff and user.is_authenticated %}
-                        <li class="dropdown">
+                        {% if user.is_authenticated %}
+                        <li class="dropdown pe-2">
                             <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Library
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">EGA Books</a>
+                                <a class="dropdown-item" href="#">EGA Discourses</a>
+                                <a class="dropdown-item" href="#">'I AM' Freedom Discourses'</a>
+                                <a class="dropdown-item" href="#">Book Store</a>
+                                <a class="dropdown-item" href="#">Free E-Books</a>
+                                <a class="dropdown-item" href="#">Divine Economy</a>
+                                <a class="dropdown-item" href="#">EGA Petitions</a>
+                                <a class="dropdown-item" href="#">Order of Melchizedek</a>
+                                <a class="dropdown-item" href="#">Other Teachings</a>
+                                <a class="dropdown-item" href="#">Cosmic Reviews</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a class="nav-link dropdown-toggle navbarDropdownMenuLink pe-2" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Events
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -65,43 +82,57 @@
                                 <a class="dropdown-item" href="#">My Cancelled Events</a>
                             </div>
                         </li>
-                        <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
-                        {% elif user.is_staff %}
-                        <li class="dropdown">
+                        <li class="dropdown pe-2">
                             <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Event Management
+                              Curriculum
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">Manage Events & Bookings</a>
-                                <a class="dropdown-item" href="#">Manage Event Windows</a>
-                                <a class="dropdown-item" href="#">Customer Profiles</a>
-                                <a class="dropdown-item" href="#">Register New Customer</a>
-                                <a class="dropdown-item" href="#">Venues</a>
-                                <a class="dropdown-item" href="#">Hosts</a>
+                                <a class="dropdown-item" href="#">Courses</a>
+                                <a class="dropdown-item" href="#">Development</a>
+                                <a class="dropdown-item" href="#">Proposal</a>
                             </div>
                         </li>
-                        <li class="dropdown">
-                            <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Customer Views
+                        <li class="pe-2">
+                            <a class="nav-link" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Discussion
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="{% url 'events' %}">Upcoming Events</a>
-                                <a class="dropdown-item" href="{% url 'support-user-requests' %}">My Support Requests</a>
-                                <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
-                            </div>
                         </li>
-                        <li class="dropdown">
+                        <li class="dropdown pe-2">
                             <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Admin
+                              Operations
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">Circles/Spheres</a>
                                 <a class="dropdown-item" href="#">Tasks</a>
-                                <a class="dropdown-item" href="#">Support Dashboard</a>
-                                <a class="dropdown-item" href="#">Cancelled Events</a>
-                                <a class="dropdown-item" href="#">Cancellation Requests</a>
-                                <a class="dropdown-item" href="#">LEE</a>
-                                <a class="dropdown-item" href="#">PEePs</a>
-                                <a class="dropdown-item" href="#">Settings</a>
+                                <a class="dropdown-item" href="#">Dashboard</a>
+                            </div>
+                        </li>
+                        <li class="dropdown pe-2">
+                            <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="{% url 'profile' %}" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              My Account
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
+                                <a class="dropdown-item" href="#">Ask A Question</a>
+                                <a class="dropdown-item" href="{% url 'password-reset' %}">Reset Password</a>
+                            </div>
+                        </li>
+                        {% else %}
+                        <li class="dropdown pe-2">
+                            <a class="nav-link dropdown-toggle navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Library
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">EGA Books</a>
+                                <a class="dropdown-item" href="#">EGA Discourses</a>
+                                <a class="dropdown-item" href="#">'I AM' Freedom Discourses'</a>
+                                <a class="dropdown-item" href="#">Book Store</a>
+                                <a class="dropdown-item" href="#">Free E-Books</a>
+                                <a class="dropdown-item" href="#">Divine Economy</a>
+                                <a class="dropdown-item" href="#">EGA Petitions</a>
+                                <a class="dropdown-item" href="#">Order of Melchizedek</a>
+                                <a class="dropdown-item" href="#">Other Teachings</a>
+                                <a class="dropdown-item" href="#">Cosmic Reviews</a>
                             </div>
                         </li>
                         {% endif %}
@@ -110,20 +141,22 @@
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav ms-auto">
                         {% if user.is_staff %}
-                            <span class="p-1"><a class="btn btn-success d-none d-xl-block" href="#"><i class="fas fa-headset"></i> Support</a></span>
-                            <a class="nav-link d-xl-none" href="#">Support</a>
-                            <span class="p-1"><a class="btn btn-outline-secondary d-none d-xl-block text-white" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></span>
-                            <a class="nav-link d-xl-none" href="#">Logout</a>
+                            <span class="ps-2"><a class="nav-link d-none d-xl-block text-decoration-none" href="{% url 'profile' %}">Search</a></span>
+                            <a class="nav-link d-xl-none" href="#">Search</a>
+                            <span class="ps-2"><a class="nav-link d-none d-xl-block text-decoration-none" href="{% url 'logout' %}">Logout</a></span>
+                            <a class="nav-link d-xl-none" href="{% url 'logout' %}">Logout</a>
                         {% elif user.is_authenticated %}
-                            <span class="p-1"><a class="btn btn-success d-none d-xl-block" href="#"><i class="fas fa-headset"></i> Support</a></span>
-                            <a class="nav-link d-xl-none" href="#">Support</a>
-                            <span class="p-1"><a class="btn btn-outline-secondary d-none d-xl-block text-white" href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></span>
-                            <a class="nav-link d-xl-none" href="#">Logout</a>
+                            <span class="ps-2"><a class="nav-link d-none d-xl-block text-decoration-none" href="{% url 'profile' %}">Search</a></span>
+                            <a class="nav-link d-xl-none" href="#">Search</a>
+                            <span class="ps-2"><a class="nav-link d-none d-xl-block text-decoration-none" href="{% url 'logout' %}">Logout</a></span>
+                            <a class="nav-link d-xl-none" href="{% url 'logout' %}">Logout</a>
                         {% else %}
-                            <span class="p-1"><a class="btn btn-success d-none d-xl-block" href="#"><i class="fas fa-sign-in-alt"></i> Log In</a></span>
-                            <a class="nav-link d-xl-none" href="#">Sign In</a>
-                            <span class="p-1"><a class="btn btn-outline-secondary d-none d-xl-block text-white" href="#"><i class="fas fa-user-plus"></i> Register</a></span>
-                            <a class="nav-link d-xl-none" href="#">Register</a>
+                            <span class="ps-2"><a class="nav-link d-none d-xl-block text-decoration-none" href="#">Search</a></span>
+                            <a class="nav-link d-xl-none" href="#">Search</a>
+                            <span class="ps-2"><a class="nav-link d-none d-xl-block text-decoration-none" href="{% url 'login' %}">Log In</a></span>
+                            <a class="nav-link d-xl-none" href="{% url 'login' %}">Sign In</a>
+                            <span class="ps-2"><a class="nav-link d-none d-xl-block text-decoration-none" href="{% url 'register' %}">Register</a></span>
+                            <a class="nav-link d-xl-none" href="{% url 'register' %}">Register</a>
                         {% endif %}
                     </div>
                 </div>
@@ -148,164 +181,42 @@
 
     <!-- Footer -->
 <footer class="bg-BlueGray text-center text-white">
-  <!-- Grid container -->
-  <div class="container p-4">
-    <!-- Section: Social media -->
-    <section class="mb-4">
-      <!-- Twitter -->
-{#      <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/LanesFlow" role="button"#}
-{#        ><i class="fab fa-twitter"></i#}
-{#      ></a>#}
-
-      <!-- Linkedin -->
-{#      <a class="btn btn-outline-light btn-floating m-1" href="https://www.linkedin.com/in/carmien-owen-3555a69/" role="button"#}
-{#        ><i class="fab fa-linkedin-in"></i#}
-{#      ></a>#}
-
-      <!-- Github -->
-{#      <a class="btn btn-outline-light btn-floating m-1" href="https://github.com/Carewen" role="button"#}
-{#        ><i class="fab fa-github"></i#}
-{#      ></a>#}
-    </section>
-    <!-- Section: Social media -->
-
-    <!-- Section: Form -->
-    <section class="">
-      <form action="">
-        <!--Grid row-->
-        <div class="row d-flex justify-content-center">
-          <!--Grid column-->
-          <div class="col-auto">
-            <p class="pt-2">
-            </p>
-          </div>
-          <!--Grid column-->
-
-          <!--Grid column-->
-          </div>
-          <!--Grid column-->
-
-          <!--Grid column-->
-          <div class="col-auto">
-            <!-- Submit button -->
-          </div>
-          <!--Grid column-->
-        <!--Grid row-->
-      </form>
-    </section>
-    <!-- Section: Form -->
-
-    <!-- Section: Text -->
-    <section class="mb-4">
-      <p>
-        Cosmic Christ Love.
-      </p>
-        <p>
-            Tagline.
-        </p>
-    </section>
-    <!-- Section: Text -->
-
-    <!-- Section: Links -->
-    <section class="">
-      <!--Grid row-->
-      <div class="row">
-        <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase text-BlueGray">Footer heading</h5>
-
-          <ul class="list-unstyled mb-0">
-            <li>
-              <a href="#" class=" text-BlueGray">.</a>
-            </li>
-            <li>
-              <a href="#" class="text-BlueGray">.</a>
-            </li>
-            <li>
-              <a href="#" class=" text-BlueGray">.</a>
-            </li>
-            <li>
-              <a href="#" class="text-BlueGray">.</a>
-            </li>
-          </ul>
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase text-BlueGray">.</h5>
-
-          <ul class="list-unstyled mb-0">
-            <li>
-              <a href="#" class=" text-BlueGray">.</a>
-            </li>
-            <li>
-              <a href="#" class="text-BlueGray">.</a>
-            </li>
-            <li>
-              <a href="#" class=" text-BlueGray">.</a>
-            </li>
-            <li>
-              <a href="#" class="text-BlueGray">.</a>
-            </li>
-          </ul>
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase text-BlueGray">.</h5>
-
-          <ul class="list-unstyled mb-0">
-            <li>
-              <a href="#" class=" text-BlueGray">.</a>
-            </li>
-            <li>
-              <a href="#" class="text-BlueGray">.</a>
-            </li>
-            <li>
-              <a href="#" class=" text-BlueGray">.</a>
-            </li>
-            <li>
-              <a href="#" class="text-BlueGray">.</a>
-            </li>
-          </ul>
-        </div>
-        <!--Grid column-->
-
-        <!--Grid column-->
-        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-          <h5 class="text-uppercase text-BlueGray">.</h5>
-
-          <ul class="list-unstyled mb-0">
-            <li>
-              <a href="#" class=" text-BlueGray">.</a>
-            </li>
-            <li>
-              <a href="#" class="text-BlueGray">.</a>
-            </li>
-            <li>
-              <a href="#" class=" text-BlueGray">.</a>
-            </li>
-            <li>
-              <a href="#" class="text-BlueGray">.</a>
-            </li>
-          </ul>
-        </div>
-        <!--Grid column-->
-      </div>
-      <!--Grid row-->
-    </section>
-    <!-- Section: Links -->
-  </div>
-
-  <!-- Grid container -->
-
-  <!-- Copyright -->
-  <div class="text-center p-3 bg-dark" style="background-color: rgba(0, 0, 0, 0.2);">
-    <span>©{{ year }} Copyright: Cosmic Christ Love</span>
-  </div>
-  <!-- Copyright -->
+    <div class="container p-4">
+        <section>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0"></div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <a class="nav-item nav-link footer-nav" href="#">Contact</a>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <a class="nav-item nav-link footer-nav" href="#">Donation</a>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <a class="nav-item nav-link footer-nav" href="#">Newsletter subscription</a>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0"></div>
+            </div>
+            <div class="row pt-4">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0"></div>
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+{#                    <img src="https://django-whurthy.s3.us-west-1.amazonaws.com/whurthy-static/paypal-icon.png.jpeg" alt="Donate" class="img-fluid pb-2" width="50%">#}
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0"></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-6 mb-4 mb-md-0">
+                    <p class="text-white">CosmicChrist.Love is not a commercial site or business. All information shared on this website is for Educational Purposes only.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0"></div>
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <p class="text-white">©{{ year }} Copyright: Elemental Grace Alliance</p>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0"></div>
+            </div>
+        </section>
+    </div>
 </footer>
 <!-- Footer -->
 
