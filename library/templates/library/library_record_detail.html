@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content %}
+    {% if messages %}
+        <section>
+            <div>
+                <p class="alert-{{ message.tags }}">
+                    {{ message }}
+                </p>
+            </div>
+        </section>
+    {% endif %}
+    <section class="media content-section text-CCL-Gold">
+        <div class="row pt-2">
+            <div class="col-sm-12">
+                <h4><strong>Part {{ library_record.part_number }} - {{ library_record.series_title }} - {{ library_record.title }} - {{ library_record.principal_cosmic_author }} - {{ library_record.date_communicated }}</strong></h4>
+            </div>
+        </div>
+    </section>
+    <section class="media content-section text-CCL-Gold">
+        <div class="row pt-2">
+            <div class="col-sm-12">
+                <p><strong>INVOCATION: </strong>{{ library_record.invocation|safe }}</p>
+            </div>
+        </div>
+        <div class="row pt-2">
+            <div class="col-sm-12">
+                <p><strong class="text-uppercase">{{ library_record.principal_cosmic_author }}:</strong> {{ library_record.body|safe }}</p>
+            </div>
+        </div>
+        <div class="row pt-2">
+            <div class="col-sm-12">
+                <p><strong>BENEDICTION: </strong>{{ library_record.benediction|safe }}</p>
+            </div>
+        </div>
+    </section>
+    {% if library_record.pdf_url or library_record.doc_url or library_record.mp3_url  %}
+    <section class="media content-section text-CCL-Gold">
+        <div class="row pt-2">
+            <div class="col-sm-4">
+                <h6><strong>Downloadable files</strong></h6>
+            </div>
+        </div>
+        <div class="row pt-2">
+            {% if library_record.pdf_url %}
+            <div class="col-sm-4">
+                <p><a href="{{ library_record.pdf_url }}" class="text-CCL-Blue" target="_blank"><strong>PDF</strong></a> </p>
+            </div>
+            {% endif %}
+            {% if library_record.doc_url %}
+            <div class="col-sm-4">
+                <p><a href="{{ library_record.doc_url }}" class="text-CCL-Blue" target="_blank"><strong>DOC</strong></a> </p>
+            </div>
+            {% endif %}
+            {% if library_record.mp3_url %}
+            <div class="col-sm-4">
+                <p><a href="{{ library_record.mp3_url }}" class="text-CCL-Blue" target="_blank"><strong>MP3</strong></a> </p>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    {% endif %}
+    <section class="media content-section">
+        <div class="row pt-2 pb-2">
+            <div class="col-sm-3">
+                <a href="{% url 'library-records' %}" class="btn btn-outline-CCL-Blue col-12">Go Back</a>
+            </div>
+            {% if user.is_staff %}
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <a href="{% url 'library-record-update' library_record.id %}" class="btn btn-CCL-Blue col-12">Edit Record</a>
+            </div>
+            {% endif %}
+            {% if user.is_superuser %}
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3">
+                <a href="{% url 'library-record-delete' library_record.id %}" class="btn btn-outline-danger col-12">Delete Record</a>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

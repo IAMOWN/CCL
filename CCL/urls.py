@@ -36,6 +36,10 @@ urlpatterns = [
 
     path('profile/', user_views.profile, name='profile'),
 
+    # App includes
+    path('', include('library.urls')),
+    path('', include('ops.urls')),
+
     # User Profile/Loyalty
     path('profiles/', user_views.ProfileListView.as_view(), name='profiles'),
     path('profiles/<int:pk>/<int:user_id>/', user_views.ProfileDetailView.as_view(), name='profile-customer'),

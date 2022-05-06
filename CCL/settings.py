@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'library.apps.LibraryConfig',
     'ops.apps.OpsConfig',
     'users.apps.UsersConfig',
     'home.apps.HomeConfig',
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'bootstrap_datepicker_plus',
     'phone_field',
+    'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

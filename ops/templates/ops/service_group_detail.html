@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content %}
+    {% if messages %}
+        <section>
+            <div>
+                <p class="alert-{{ message.tags }}">
+                    {{ message }}
+                </p>
+            </div>
+        </section>
+    {% endif %}
+    <section class="media content-section text-CCL-Gold">
+        <div class="row pt-2">
+            <div class="col-sm-12">
+                <h3><strong>Service Group: {{ service_group.service_group }} <a href="{% url 'service-group-update' service_group.id %}" class="pb-2 text-CCL-Blue"><i class="far fa-plus-square h5-plus"></i></a>{% if user.is_superuser %}<a href="{% url 'service-group-delete' service_group.id %}" class="delete-link float-end pt-2"><i class="far fa-times-circle h5-plus"></i></a>{% endif %}</strong></h3>
+            </div>
+        </div>
+    </section>
+    <section class="media content-section text-CCL-Gold">
+        <div class="row pt-2">
+            <div class="col-sm-12">
+                <p>
+                    <strong>Members: </strong> {% for member in service_group.members.all %}{{ member }}; {% endfor %}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p><strong>Type:</strong> {{ service_group.service_group_type }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p><strong>Purpose:</strong> {{ service_group.purpose|linebreaksbr }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p><strong>Qualified Intentions:</strong> {{ service_group.qualified_intentions|linebreaksbr }}</p>
+            </div>
+        </div>
+    </section>
+    <section class="media content-section">
+        <div class="row pt-2 pb-2">
+            <div class="col-sm-3">
+                <a href="{% url 'service-groups' %}" class="btn btn-outline-CCL-Blue col-12">Go Back</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

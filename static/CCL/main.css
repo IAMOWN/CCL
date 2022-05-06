@@ -29,6 +29,65 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     line-height: 1.2;
 }
 
+/*------------------------------------
+- Card layout
+------------------------------------*/
+.content-section {
+  background: #ffffff;
+  padding: 10px 20px;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  margin-bottom: 20px;
+}
+
+.article-title {
+  color: #444444;
+}
+
+a.article-title:hover {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.delete-link {
+    text-decoration: none;
+    font-weight: 900;
+    color: #bd2130;
+    font-size: 22px;
+    line-height: 0;
+}
+.alert-section {
+    background: #f8d7da;
+    padding: 10px 20px;
+    border: 1px solid #dddddd;
+    border-radius: 3px;
+    margin-bottom: 20px;
+}
+
+.h6-plus {
+    font-size: 1rem;
+}
+.h5-plus {
+    font-size: 1.25rem;
+}
+.h4-plus {
+    font-size: 1.5rem;
+}
 
 /*------------------------------------
 - COLOR CCL-Gold
@@ -174,6 +233,150 @@ a.text-CCL-Gold:hover, a.text-CCL-Gold:focus {
 }
 
 
+/*------------------------------------
+- COLOR CCL-Blue
+------------------------------------*/
+.alert-CCL-Blue {
+    color: #1c595e;
+    background-color: #d0eef1;
+    border-color: #c1e8ec;
+}
+
+.alert-CCL-Blue hr {
+    border-top-color: #ade1e6;
+}
+
+.alert-CCL-Blue .alert-link {
+    color: #103437;
+}
+
+.badge-CCL-Blue {
+    color: #212529;
+    background-color: #39b2bd;
+}
+
+.badge-CCL-Blue[href]:hover, .badge-CCL-Blue[href]:focus {
+    color: #212529;
+    background-color: #2d8d95;
+}
+
+.bg-CCL-Blue {
+    background-color: #39b2bd !important;
+}
+
+a.bg-CCL-Blue:hover, a.bg-CCL-Blue:focus,
+button.bg-CCL-Blue:hover,
+button.bg-CCL-Blue:focus {
+    background-color: #2d8d95 !important;
+}
+
+.border-CCL-Blue {
+    border-color: #39b2bd !important;
+}
+
+.btn-CCL-Blue {
+    color: #FFFFFF;
+    background-color: #39b2bd;
+    border-color: #39b2bd;
+}
+
+.btn-CCL-Blue:hover {
+    color: #212529;
+    background-color: #3098a1;
+    border-color: #2d8d95;
+}
+
+.btn-CCL-Blue:focus, .btn-CCL-Blue.focus {
+    box-shadow: 0 0 0 0.2rem rgba(57, 178, 189, 0.5);
+}
+
+.btn-CCL-Blue.disabled, .btn-CCL-Blue:disabled {
+    color: #212529;
+    background-color: #39b2bd;
+    border-color: #39b2bd;
+}
+
+.btn-CCL-Blue:not(:disabled):not(.disabled):active, .btn-CCL-Blue:not(:disabled):not(.disabled).active, .show > .btn-CCL-Blue.dropdown-toggle {
+    color: #212529;
+    background-color: #2d8d95;
+    border-color: #29828a;
+}
+
+.btn-CCL-Blue:not(:disabled):not(.disabled):active:focus, .btn-CCL-Blue:not(:disabled):not(.disabled).active:focus, .show > .btn-CCL-Blue.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(57, 178, 189, 0.5);
+}
+
+.btn-outline-CCL-Blue {
+    color: #39b2bd;
+    background-color: transparent;
+    border-color: #39b2bd;
+}
+
+.btn-outline-CCL-Blue:hover {
+    color: #212529;
+    background-color: #39b2bd;
+    border-color: #39b2bd;
+}
+
+.btn-outline-CCL-Blue:focus, .btn-outline-CCL-Blue.focus {
+    box-shadow: 0 0 0 0.2rem rgba(57, 178, 189, 0.5);
+}
+
+.btn-outline-CCL-Blue.disabled, .btn-outline-CCL-Blue:disabled {
+    color: #39b2bd;
+    background-color: transparent;
+}
+
+.btn-outline-CCL-Blue:not(:disabled):not(.disabled):active, .btn-outline-CCL-Blue:not(:disabled):not(.disabled).active, .show > .btn-outline-CCL-Blue.dropdown-toggle {
+    color: #212529;
+    background-color: #39b2bd;
+    border-color: #39b2bd;
+}
+
+.btn-outline-CCL-Blue:not(:disabled):not(.disabled):active:focus, .btn-outline-CCL-Blue:not(:disabled):not(.disabled).active:focus, .show > .btn-outline-CCL-Blue.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(57, 178, 189, 0.5);
+}
+
+.list-group-item-CCL-Blue {
+    color: #1c595e;
+    background-color: #c1e8ec;
+}
+
+.list-group-item-CCL-Blue.list-group-item-action:hover, .list-group-item-CCL-Blue.list-group-item-action:focus {
+    color: #1c595e;
+    background-color: #ade1e6;
+}
+
+.list-group-item-CCL-Blue.list-group-item-action.active {
+    color: #212529;
+    background-color: #1c595e;
+    border-color: #1c595e;
+}
+
+.table-CCL-Blue,
+.table-CCL-Blue > th,
+.table-CCL-Blue > td {
+    background-color: #c1e8ec;
+}
+
+.table-hover .table-CCL-Blue:hover {
+    background-color: #ade1e6;
+}
+
+.table-hover .table-CCL-Blue:hover > td,
+.table-hover .table-CCL-Blue:hover > th {
+    background-color: #ade1e6;
+}
+
+.text-CCL-Blue {
+    color: #39b2bd !important;
+}
+
+a.text-CCL-Blue:hover, a.text-CCL-Blue:focus {
+    color: #2d8d95 !important;
+}
+
+
 /* **** Navigation **** */
 .nav-item {
     padding: 0 9px;
@@ -229,6 +432,16 @@ a.text-CCL-Gold:hover, a.text-CCL-Gold:focus {
     color: #fff;
     text-decoration: none;
     background-color: #6EC1E4
+}
+
+/*------------------------------------
+- Layout & Padding
+------------------------------------*/
+.row1 {
+    background-color: #DAEAEA;
+}
+.row2 {
+    background-color: #FFFFFF;
 }
 
 

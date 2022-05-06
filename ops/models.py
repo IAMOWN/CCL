@@ -1,7 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.utils import timezone
 
+# ####################### CONSTANTS #######################
 SERVICE_GROUP_TYPES = [
     ('---', '---'),
     ('1) Esoteric', '1) Esoteric'),
@@ -53,7 +55,7 @@ class ServiceGroup(models.Model):
         blank=True,
     )
     date_created = models.DateTimeField(
-        auto_now=True
+        auto_now_add=True
     )
 
     def __str__(self):
@@ -62,3 +64,6 @@ class ServiceGroup(models.Model):
     class Meta:
         verbose_name_plural = 'Service Groups'
         verbose_name = 'Service Group'
+
+    def get_absolute_url(self):
+        return reverse('service-group', kwargs={'pk': self.pk})

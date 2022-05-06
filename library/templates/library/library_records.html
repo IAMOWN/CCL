@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content %}
+    <section class="media content-section">
+        <div class="media-body">
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="mb-2 pt-2"><strong>{{ title }}</strong></h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="media content-section">
+        <div class="row">
+            <div class="col-sm-3 pb-2 pt-2">
+                <a class="btn btn-CCL-Blue col-12" href="{% url 'library-record-create' %}">Add A Library Record</a>
+            </div>
+        </div>
+    </section>
+    <section class="media content-section text-CCL-Gold">
+        <div class="row pt-2">
+            <div class="col-sm-5">
+                <h6><strong>Title</strong></h6>
+            </div>
+            <div class="col-sm-1">
+                <h6><strong>Part</strong></h6>
+            </div>
+            <div class="col-sm-3">
+                <h6><strong>Series</strong></h6>
+            </div>
+            <div class="col-sm-3">
+                <h6><strong>Principal Cosmic Author</strong></h6>
+            </div>
+        </div>
+    </section>
+    {% for record in library_records %}
+    <section class="list-group-item list-group-item-light {% cycle 'row1' 'row2' %} text-CCL-Gold">
+        <div class="row pt-2">
+            <div class="col-sm-5">
+                <p><strong><a href="{% url 'library-record' record.id %}" class="text-CCL-Blue">{{ record.title }}</a></strong></p>
+            </div>
+            <div class="col-sm-1">
+                <p>{{ record.part_number }}</p>
+            </div>
+            <div class="col-sm-3">
+                <p>{{ record.series_title }}</p>
+            </div>
+            <div class="col-sm-3">
+                <p>{{ record.principal_cosmic_author }}</p>
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+{% endblock content %}
