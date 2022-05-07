@@ -95,11 +95,11 @@
             <div class="row pt-4">
                 <div class="col-sm-12">
                     {% if page_type == 'Update' %}
-                        <a href="{% url 'library-record' libraryrecord.id %}" class="btn btn-outline-CCL-Blue col-sm-3">Go Back</a>
-                        <input type="submit" value="Update Library Record" class="btn btn-CCL-Blue float-end col-sm-3">
+                        <a href="{% url 'library-record' libraryrecord.id %}" class="btn btn-outline-CCL-Blue col-sm-2">Go Back</a>
+                        <input type="submit" value="Update Library Record" class="btn btn-CCL-Blue float-end col-sm-2">
                     {% else %}
-                        <a href="{% url 'library-records' %}" class="btn btn-outline-CCL-Blue col-sm-3">Go Back</a>
-                        <input type="submit" value="Add Library Record" class="btn btn-CCL-Blue float-end col-sm-3">
+                        <a href="{% url 'library-records' %}" class="btn btn-outline-CCL-Blue col-sm-2">Go Back</a>
+                        <input type="submit" value="Add Library Record" class="btn btn-CCL-Blue float-end col-sm-2">
                     {% endif %}
                 </div>
             </div>

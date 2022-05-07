@@ -439,9 +439,11 @@ a.text-CCL-Blue:hover, a.text-CCL-Blue:focus {
 ------------------------------------*/
 .row1 {
     background-color: #DAEAEA;
+    border-radius: 3px;
 }
 .row2 {
     background-color: #FFFFFF;
+    border-radius: 3px;
 }
 
 

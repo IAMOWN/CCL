@@ -199,7 +199,7 @@ class CosmicAuthorDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 # ####################### LIBRARY RECORD VIEWS #######################
-class LibraryRecordList(LoginRequiredMixin, ListView):
+class LibraryRecordList(ListView):
     model = LibraryRecord
     template_name = 'library/library_records.html'
     context_object_name = 'library_records'
@@ -213,7 +213,7 @@ class LibraryRecordList(LoginRequiredMixin, ListView):
 
 
 # ####################### Cosmic Author - Detail View #######################
-class LibraryRecordDetail(LoginRequiredMixin, DetailView):
+class LibraryRecordDetail(DetailView):
     model = LibraryRecord
     template_name = 'library/library_record_detail.html'
     context_object_name = 'library_record'

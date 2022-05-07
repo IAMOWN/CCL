@@ -64,6 +64,10 @@ class ServiceGroup(models.Model):
     class Meta:
         verbose_name_plural = 'Service Groups'
         verbose_name = 'Service Group'
+        ordering = [
+            'service_group_type',
+            'service_group',
+        ]
 
     def get_absolute_url(self):
         return reverse('service-group', kwargs={'pk': self.pk})

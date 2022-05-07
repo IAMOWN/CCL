@@ -45,11 +45,11 @@
         <div class="row pt-4">
             <div class="col-sm-12">
                 {% if page_type == 'Update' %}
-                    <a href="{% url 'tag' tag.id %}" class="btn btn-outline-CCL-Blue col-sm-3">Go Back</a>
-                    <input type="submit" value="Update Tag" class="btn btn-CCL-Blue float-end col-sm-3">
+                    <a href="{% url 'tag' tag.id %}" class="btn btn-outline-CCL-Blue col-sm-2">Go Back</a>
+                    <input type="submit" value="Update Tag" class="btn btn-CCL-Blue float-end col-sm-2">
                 {% else %}
-                    <a href="{% url 'tags' %}" class="btn btn-outline-CCL-Blue col-sm-3">Go Back</a>
-                    <input type="submit" value="Add Tag" class="btn btn-CCL-Blue float-end col-sm-3">
+                    <a href="{% url 'tags' %}" class="btn btn-outline-CCL-Blue col-sm-2">Go Back</a>
+                    <input type="submit" value="Add Tag" class="btn btn-CCL-Blue float-end col-sm-2">
                 {% endif %}
             </div>
         </div>
