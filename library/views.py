@@ -233,6 +233,10 @@ class LibraryRecordCreate(LoginRequiredMixin, CreateView):
     template_name = 'library/library_record_form.html'
 
     def form_valid(self, form):
+        form.save(commit=False)
+        form.instance.year_communicated = form.instance.date_communicated.year
+        form.save()
+
         message = form.instance.title
         messages.add_message(
             self.request,
@@ -254,6 +258,19 @@ class LibraryRecordUpdate(LoginRequiredMixin, UpdateView):
     model = LibraryRecord
     form_class = UpdateLibraryRecordForm
     template_name = 'library/library_record_form.html'
+
+    def form_valid(self, form):
+        form.save(commit=False)
+        form.instance.year_communicated = form.instance.date_communicated.year
+        form.save()
+
+        message = form.instance.title
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            f'The Library Record "{message}" has been updated'
+        )
+        return super(LibraryRecordUpdate, self).form_valid(form)
 
     def get_context_data(self, *args, **kwargs):
         context = super(LibraryRecordUpdate, self).get_context_data(**kwargs)

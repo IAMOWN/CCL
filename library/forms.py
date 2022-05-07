@@ -41,6 +41,11 @@ def library_record_form_validation(form, form_type):
             'title',
             'A title must be entered.'
         )
+    if cleaned_data.get('date_communicated') is None:
+        form.add_error(
+            'date_communicated',
+            'A date must be entered.'
+        )
     return
 
 
@@ -106,6 +111,7 @@ class CreateLibraryRecordForm(forms.ModelForm):
     class Meta:
         model = LibraryRecord
         fields = [
+            'library_record_type',
             'title',
             'part_number',
             'series_title',
@@ -135,6 +141,7 @@ class UpdateLibraryRecordForm(forms.ModelForm):
     class Meta:
         model = LibraryRecord
         fields = [
+            'library_record_type',
             'title',
             'part_number',
             'series_title',

@@ -9,6 +9,26 @@
         Create A Library Record
     {% endif %}
 {% endblock %}
+{% block script_header %}
+    <script>
+        $(document).ready(function() {
+          $('#id_library_record_type').change(function() {
+            if ($(this).val() === "Discourse") {
+              $('#div_id_invocation').show();
+              $('#div_id_benediction').show();
+              $('#div_id_part_number').show();
+              $('#div_id_series_title').show();
+            } else{
+              $('#div_id_invocation').hide();
+              $('#div_id_benediction').hide();
+              $('#div_id_part_number').hide();
+              $('#div_id_series_title').hide();
+            }
+          });
+          $("#id_deposit_required").trigger("change")
+        })
+    </script>
+{% endblock %}
 {% block content %}
     <section class="media content-section">
     {% if page_type == 'Update' %}
@@ -38,7 +58,10 @@
             {% csrf_token %}
             {{ form.media }}
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-4">
+                    {{ form.library_record_type|as_crispy_field }}
+                </div>
+                <div class="col-sm-4">
                     {{ form.title|as_crispy_field }}
                 </div>
                 <div class="col-sm-4">

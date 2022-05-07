@@ -52,3 +52,7 @@ class UpdateServiceGroupForm(forms.ModelForm):
             'service_group_type',
             'service_group_status',
         ]
+
+    def clean(self):
+        service_group_form_validation(self, UpdateServiceGroupForm)
+        return self.cleaned_data

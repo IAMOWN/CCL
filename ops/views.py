@@ -1,7 +1,7 @@
 from datetime import datetime
+
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
-
 from django.urls import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -83,6 +83,15 @@ class ServiceGroupUpdate(LoginRequiredMixin, UpdateView):
     model = ServiceGroup
     form_class = UpdateServiceGroupForm
     template_name = 'ops/service_group_form.html'
+
+    def form_valid(self, form):
+        message = form.instance.service_group
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            f'The Service Group "{message}" has been updated'
+        )
+        return super(ServiceGroupUpdate, self).form_valid(form)
 
     def get_context_data(self, *args, **kwargs):
         context = super(ServiceGroupUpdate, self).get_context_data(**kwargs)

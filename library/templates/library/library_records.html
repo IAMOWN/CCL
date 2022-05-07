@@ -23,34 +23,34 @@
     </section>
     <section class="media content-section text-CCL-Gold d-none d-xl-block">
         <div class="row pt-2">
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <h6><strong>Title</strong></h6>
             </div>
-            <div class="col-sm-1">
-                <h6><strong>Part</strong></h6>
-            </div>
-            <div class="col-sm-3">
-                <h6><strong>Series</strong></h6>
+            <div class="col-sm-2">
+                <h6><strong>Record Type</strong></h6>
             </div>
             <div class="col-sm-3">
                 <h6><strong>Principal Cosmic Author</strong></h6>
+            </div>
+            <div class="col-sm-3">
+                <h6><strong>Date Communicated</strong></h6>
             </div>
         </div>
     </section>
     {% for record in library_records %}
     <section class="list-group-item list-group-item-light {% cycle 'row1' 'row2' %} text-CCL-Gold">
         <div class="row pt-2">
-            <div class="col-sm-5">
+            <div class="col-sm-4">
                 <p><strong><a href="{% url 'library-record' record.id %}" class="text-CCL-Blue">{{ record.title }}</a></strong></p>
             </div>
-            <div class="col-sm-1">
-                <p>{{ record.part_number }}</p>
-            </div>
-            <div class="col-sm-3">
-                <p>{{ record.series_title }}</p>
+            <div class="col-sm-2">
+                <p>{{ record.library_record_type }}</p>
             </div>
             <div class="col-sm-3">
                 <p>{{ record.principal_cosmic_author }}</p>
+            </div>
+            <div class="col-sm-3">
+                <p>{{ record.date_communicated }}</p>
             </div>
         </div>
     </section>

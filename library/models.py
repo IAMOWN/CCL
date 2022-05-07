@@ -3,6 +3,7 @@ from django.urls import reverse
 
 from datetime import date
 
+
 # ####################### Date logic #######################
 def current_year():
     return date.today().year
@@ -62,17 +63,29 @@ class Tag(models.Model):
         return reverse('tag', kwargs={'pk': self.pk})
 
 
+# ####################### CHOICE CONSTANTS #######################
+LIBRARY_RECORD_TYPE = [
+    ('Discourse', 'Discourse'),
+    ('Book', 'Book'),
+    ('Cosmic Review', 'Cosmic Review'),
+]
+
+
 # ####################### Library Record #######################
 class LibraryRecord(models.Model):
     """Library records capture all Discourses for the CCL Web Application."""
+    library_record_type = models.CharField(
+        max_length=20,
+        choices=LIBRARY_RECORD_TYPE,
+        default='Discourse'
+    )
     title = models.CharField(
         max_length=200,
-        null=True,
-        blank=True,
         default=''
     )
     part_number = models.IntegerField(
-        default=1
+        blank=True,
+        null=True,
     )
     invocation = models.TextField(
         default='',
@@ -113,7 +126,10 @@ class LibraryRecord(models.Model):
         blank=True,
     )
     date_communicated = models.DateField(default=date.today)
-    year_communicated = models.IntegerField(default=current_year())
+    year_communicated = models.IntegerField(
+        null=True,
+        blank=True,
+    )
     pdf_url = models.CharField(
         max_length=200,
         null=True,
@@ -140,8 +156,7 @@ class LibraryRecord(models.Model):
 
     class Meta:
         ordering = [
-            'series_title',
-            'part_number',
+            '-date_communicated',
         ]
 
     def __str__(self):

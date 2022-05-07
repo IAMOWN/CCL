@@ -262,7 +262,7 @@ COUNTRY_CHOICES = [
 NOTIFICATION_PREFERENCE = [
     ('None', 'None'),
     ('Email', 'EMail'),
-    ('Text/SMS', 'Text/SMS'),
+    # ('Text/SMS', 'Text/SMS'),
 ]
 
 
