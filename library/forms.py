@@ -41,6 +41,11 @@ def library_record_form_validation(form, form_type):
             'title',
             'A title must be entered.'
         )
+    if cleaned_data.get('text') is None:
+        form.add_error(
+            'text',
+            'Text must be entered.'
+        )
     if cleaned_data.get('date_communicated') is None:
         form.add_error(
             'date_communicated',
@@ -117,6 +122,7 @@ class CreateLibraryRecordForm(forms.ModelForm):
             'series_title',
             'invocation',
             'body',
+            'text',
             'benediction',
             'principal_cosmic_author',
             'supporting_cosmic_authors',
@@ -147,6 +153,7 @@ class UpdateLibraryRecordForm(forms.ModelForm):
             'series_title',
             'invocation',
             'body',
+            'text',
             'benediction',
             'principal_cosmic_author',
             'supporting_cosmic_authors',

@@ -3,6 +3,8 @@ from django.urls import reverse
 
 from datetime import date
 
+from tinymce.models import HTMLField
+
 
 # ####################### Date logic #######################
 def current_year():
@@ -97,6 +99,11 @@ class LibraryRecord(models.Model):
         blank=True,
         null=True,
     )
+    text = HTMLField(
+        default='',
+        blank=True,
+        null=True,
+    )
     benediction = models.TextField(
         default='',
         blank=True,
@@ -157,6 +164,8 @@ class LibraryRecord(models.Model):
     class Meta:
         ordering = [
             '-date_communicated',
+            'series_title',
+            'part_number',
         ]
 
     def __str__(self):

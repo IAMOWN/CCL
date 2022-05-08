@@ -24,19 +24,19 @@
         {% if library_record.invocation %}
         <div class="row pt-2">
             <div class="col-sm-12">
-                <p><strong>INVOCATION: </strong>{{ library_record.invocation|safe }}</p>
+                <p><strong>INVOCATION: {{ library_record.invocation|safe }}</strong></p>
             </div>
         </div>
         {% endif %}
-        <div class="row pt-2">
+        <div class="row">
             <div class="col-sm-12">
-                <p><strong class="text-uppercase">{{ library_record.principal_cosmic_author }}:</strong> {{ library_record.body|safe }}</p>
+                <p>{{ library_record.text|safe }}</p>
             </div>
         </div>
         {% if library_record.benediction %}
         <div class="row pt-2">
             <div class="col-sm-12">
-                <p><strong>BENEDICTION: </strong>{{ library_record.benediction|safe }}</p>
+                <p><strong>BENEDICTION: {{ library_record.benediction|safe }}</strong></p>
             </div>
         </div>
         {% endif %}

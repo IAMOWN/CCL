@@ -39,6 +39,7 @@ urlpatterns = [
     # App includes
     path('', include('library.urls')),
     path('', include('ops.urls')),
+    path('tinymce/', include('tinymce.urls')),
 
     # User Profile/Loyalty
     path('profiles/', user_views.ProfileListView.as_view(), name='profiles'),

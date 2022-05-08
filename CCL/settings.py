@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'ops.apps.OpsConfig',
     'users.apps.UsersConfig',
     'home.apps.HomeConfig',
+    'tinymce',
     'crispy_forms',
     'crispy_bootstrap5',
     'bootstrap4',
