@@ -13,19 +13,26 @@
     <script>
         $(document).ready(function() {
           $('#id_library_record_type').change(function() {
-            if ($(this).val() === "Discourse") {
-              $('#div_id_invocation').show();
-              $('#div_id_benediction').show();
-              $('#div_id_part_number').show();
-              $('#div_id_series_title').show();
-            } else{
+            if ($(this).val() === "Cosmic Review") {
               $('#div_id_invocation').hide();
               $('#div_id_benediction').hide();
               $('#div_id_part_number').hide();
               $('#div_id_series_title').hide();
             }
+            else if ($(this).val() === "Book") {
+              $('#div_id_invocation').hide();
+              $('#div_id_benediction').hide();
+              $('#div_id_part_number').hide();
+              $('#div_id_series_title').hide();
+            }
+            else if ($(this).val() === "Discourse") {
+              $('#div_id_invocation').show();
+              $('#div_id_benediction').show();
+              $('#div_id_part_number').show();
+              $('#div_id_series_title').show();
+            }
           });
-          $("#id_deposit_required").trigger("change")
+          $("#id_library_record_type").trigger("change")
         })
     </script>
 {% endblock %}
@@ -129,3 +136,4 @@
         </form>
     </section>
 {% endblock %}
+

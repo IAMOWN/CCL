@@ -17,44 +17,34 @@
     <section class="media content-section">
         <div class="row">
             <div class="col-sm-3 pb-2 pt-2">
-                <a class="btn btn-CCL-Blue col-12" href="{% url 'library-record-create' %}">Add A Library Record</a>
+                <a class="btn btn-CCL-Blue col-12" href="{% url 'objective-create' %}">Add An Objective</a>
             </div>
         </div>
     </section>
     <section class="media content-section text-CCL-Gold d-none d-xl-block">
         <div class="row pt-2">
-            <div class="col-sm-4">
-                <h6><strong>Title</strong></h6>
-            </div>
-            <div class="col-sm-2">
-                <h6><strong>Record Type</strong></h6>
+            <div class="col-sm-6">
+                <h6><strong>Objective</strong></h6>
             </div>
             <div class="col-sm-3">
-                <h6><strong>Principal Author</strong></h6>
+                <h6><strong>Service Group</strong></h6>
             </div>
             <div class="col-sm-3">
-                <h6><strong>Date Communicated</strong></h6>
+                <h6><strong>Development Template</strong></h6>
             </div>
         </div>
     </section>
-    {% for record in library_records %}
+    {% for objective in objectives %}
     <section class="list-group-item list-group-item-light {% cycle 'row1' 'row2' %} text-CCL-Gold">
         <div class="row pt-2">
-            <div class="col-sm-4">
-                {% if record.library_record_type == 'Discourse' %}
-                <p><strong><a href="{% url 'library-record' record.id %}" class="text-CCL-Blue">{{ record.part_number }} - {{ record.series_title }} - {{ record.title }}</a></strong></p>
-                {% else %}
-                <p><strong><a href="{% url 'library-record' record.id %}" class="text-CCL-Blue">{{ record.title }}</a></strong></p>
-                {% endif %}
-            </div>
-            <div class="col-sm-2">
-                <p>{{ record.library_record_type }}</p>
+            <div class="col-sm-6">
+                <p><strong><a href="{% url 'objective' objective.id %}" class="text-CCL-Blue">{{ objective.objective }}</a></strong></p>
             </div>
             <div class="col-sm-3">
-                <p>{{ record.principal_cosmic_author }}</p>
+                {{ objective.service_group }}
             </div>
             <div class="col-sm-3">
-                <p>{{ record.date_communicated }}</p>
+                {{ objective.objective_development_template }}
             </div>
         </div>
     </section>

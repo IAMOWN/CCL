@@ -14,11 +14,14 @@ from django.shortcuts import render
 
 from .models import (
     ServiceGroup,
+    Objective,
 )
 
 from .forms import (
     CreateServiceGroupForm,
     UpdateServiceGroupForm,
+    CreateObjectiveForm,
+    UpdateObjectiveForm,
 )
 
 
@@ -114,6 +117,98 @@ class ServiceGroupDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ServiceGroupDelete, self).get_context_data(**kwargs)
+        context['year'] = get_current_year()
+
+        return context
+
+
+# ####################### OBJECTIVE VIEWS #######################
+class ObjectiveList(LoginRequiredMixin, ListView):
+    model = Objective
+    template_name = 'ops/objectives.html'
+    context_object_name = 'objectives'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['year'] = get_current_year()
+        context['title'] = 'Service Group Objectives'
+
+        return context
+
+
+# ####################### Objective - Detail View #######################
+class ObjectiveDetail(LoginRequiredMixin, DetailView):
+    model = Objective
+    template_name = 'ops/objective_detail.html'
+    context_object_name = 'objective'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['year'] = get_current_year()
+        context['title'] = f"Objective: {Objective.objects.get(pk=self.kwargs['pk'])}"
+
+        return context
+
+
+# ####################### Objective - Create View #######################
+class ObjectiveCreate(LoginRequiredMixin, CreateView):
+    model = Objective
+    form_class = CreateObjectiveForm
+    template_name = 'ops/objective_form.html'
+
+    def form_valid(self, form):
+        message = form.instance.objective
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            f'The Objective "{message}" has been added'
+        )
+        return super(ObjectiveCreate, self).form_valid(form)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ObjectiveCreate, self).get_context_data(**kwargs)
+        context['page_type'] = 'Create'
+        context['year'] = get_current_year()
+
+        return context
+
+
+# ####################### Objective - Update View #######################
+class ObjectiveUpdate(LoginRequiredMixin, UpdateView):
+    model = Objective
+    form_class = UpdateObjectiveForm
+    template_name = 'ops/objective_form.html'
+
+    def form_valid(self, form):
+        message = form.instance.objective
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            f'The Objective "{message}" has been updated'
+        )
+        return super(ObjectiveUpdate, self).form_valid(form)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ObjectiveUpdate, self).get_context_data(**kwargs)
+        context['page_type'] = 'Update'
+        context['year'] = get_current_year()
+
+        return context
+
+
+# ####################### Objective - Delete View #######################
+class ObjectiveDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Objective
+    template_name = 'ops/objective_confirm_delete.html'
+    success_url = reverse_lazy('objectives')
+
+    def test_func(self):
+        if self.request.user.is_superuser:
+            return True
+        return False
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(ObjectiveDelete, self).get_context_data(**kwargs)
         context['year'] = get_current_year()
 
         return context

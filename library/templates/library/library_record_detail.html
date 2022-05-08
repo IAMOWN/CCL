@@ -16,7 +16,7 @@
     <section class="media content-section text-CCL-Gold">
         <div class="row pt-2">
             <div class="col-sm-12">
-                <h4><strong>Part {{ library_record.part_number }} - {{ library_record.series_title }} - {{ library_record.title }} - {{ library_record.principal_cosmic_author }} - {{ library_record.date_communicated }}</strong></h4>
+                <h4><strong>{% if library_record.library_record_type == 'Discourse' %}Part {{ library_record.part_number }} - {{ library_record.series_title }} - {% endif %}{{ library_record.title }} - {{ library_record.principal_cosmic_author }} - {{ library_record.date_communicated }}</strong></h4>
             </div>
         </div>
     </section>

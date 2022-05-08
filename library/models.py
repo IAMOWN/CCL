@@ -121,15 +121,15 @@ class LibraryRecord(models.Model):
         on_delete=models.PROTECT,
         null=True,
         blank=True,
+        verbose_name='Principal author',
     )
     supporting_cosmic_authors = models.ManyToManyField(
         CosmicAuthor,
-        null=True,
         blank=True,
+        verbose_name='Supporting authors',
     )
     tags = models.ManyToManyField(
         Tag,
-        null=True,
         blank=True,
     )
     date_communicated = models.DateField(default=date.today)
@@ -163,8 +163,6 @@ class LibraryRecord(models.Model):
 
     class Meta:
         ordering = [
-            '-date_communicated',
-            'series_title',
             'part_number',
         ]
 

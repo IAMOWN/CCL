@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block content %}
+    {% if messages %}
+        <section>
+            <div>
+                <p class="alert-{{ message.tags }}">
+                    {{ message }}
+                </p>
+            </div>
+        </section>
+    {% endif %}
+    <section class="media content-section text-CCL-Gold">
+        <div class="row pt-2">
+            <div class="col-sm-12">
+                <h3><strong>Objective: {{ objective.objective }}</strong></h3>
+            </div>
+        </div>
+    </section>
+    <section class="media content-section text-CCL-Gold">
+        <div class="row">
+            <div class="col-sm-6">
+                <p><strong>Service Group:</strong> {{ objective.service_group }}</p>
+            </div>
+            <div class="col-sm-6">
+                <p><strong>Objective Development Template:</strong> {{ objective.objective_development_template }}</p>
+            </div>
+        </div>
+    </section>
+    {% if objective.objective_development_template == '2) Descriptive' or objective.objective_development_template == '3) Change' %}
+    <section class="media content-section text-CCL-Gold">
+        <div class="row pt-2">
+            <div class="col-sm-12">
+                <h5><strong>Description</strong></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p><strong>Opportunity Statement:</strong> {{ objective.opportunity_statement|safe }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p><strong>Objective Statement:</strong> {{ objective.objective_statement|safe }}</p>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    {% if objective.objective_development_template == '3) Change' %}
+    <section class="media content-section text-CCL-Gold">
+        <div class="row pt-2">
+            <div class="col-sm-12">
+                <h5><strong>Change Management</strong></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p><strong>Awareness:</strong> {{ objective.awareness|safe }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p><strong>Clarity:</strong> {{ objective.clarity|safe }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p><strong>Emergence:</strong> {{ objective.emergence|safe }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p><strong>Discipline:</strong> {{ objective.discipline|safe }}</p>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+    <section class="media content-section">
+        <div class="row pt-2">
+            <div class="col-sm-2 pb-2">
+                <a href="{% url 'objectives' %}" class="btn btn-outline-CCL-Blue col-12">Go Back</a>
+            </div>
+            {% if user.is_staff %}
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2 text-center pb-2">
+                <a href="{% url 'objective-update' objective.id %}" class="btn btn-CCL-Blue col-12">Edit Objective</a>
+            </div>
+            {% endif %}
+            {% if user.is_superuser %}
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2 pb-2">
+                <a href="{% url 'objective-delete' objective.id %}" class="btn btn-outline-danger col-12">Delete Objective</a>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

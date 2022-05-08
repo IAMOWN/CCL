@@ -174,3 +174,17 @@ SERVER_EMAIL = os.environ.get('SERVER_EMAIL')
 # Configure company name
 COMPANY_NAME = os.environ.get('COMPANY_NAME')
 DOMAIN = os.environ.get('DOMAIN')
+
+TINYMCE_DEFAULT_CONFIG = {
+    "height": "420px",
+    "menubar": "file edit view insert format tools table help",
+    "plugins": "advlist autolink lists link image charmap print preview anchor searchreplace visualblocks "
+    "fullscreen insertdatetime media table paste code help wordcount",
+    "toolbar": "undo redo | bold italic underline strikethrough | formatselect | alignleft "
+    "aligncenter alignright alignjustify | outdent indent |  numlist bullist checklist "
+    "casechange permanentpen formatpainter removeformat | pagebreak | charmap emoticons | "
+    "fullscreen  preview save print | insertfile image media pageembed template link anchor codesample | "
+    "a11ycheck ltr rtl | showcomments addcomment code",
+    "custom_undo_redo_levels": 10,
+}
+

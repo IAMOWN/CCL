@@ -1,0 +1,132 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+    {% if page_type == 'Update' %}
+        Edit Objective
+    {% else %}
+        Create A Objective
+    {% endif %}
+{% endblock %}
+{% block script_header %}
+    <script>
+        $(document).ready(function() {
+          $('#id_objective_development_template').change(function() {
+            if ($(this).val() === "1) Simple") {
+              $('#div_id_opportunity_statement').hide();
+              $('#div_id_objective_statement').hide();
+              $('#div_id_awareness').hide();
+              $('#div_id_clarity').hide();
+              $('#div_id_emergence').hide();
+              $('#div_id_discipline').hide();
+            }
+            else if ($(this).val() === "2) Descriptive") {
+              $('#div_id_opportunity_statement').show();
+              $('#div_id_objective_statement').show();
+              $('#div_id_awareness').hide();
+              $('#div_id_clarity').hide();
+              $('#div_id_emergence').hide();
+              $('#div_id_discipline').hide();
+            }
+            else if ($(this).val() === "3) Change") {
+              $('#div_id_opportunity_statement').show();
+              $('#div_id_objective_statement').show();
+              $('#div_id_awareness').show();
+              $('#div_id_clarity').show();
+              $('#div_id_emergence').show();
+              $('#div_id_discipline').show();
+            }
+          });
+          $("#id_objective_development_template").trigger("change")
+        })
+    </script>
+{% endblock %}
+{% block content %}
+    <section class="media content-section">
+    {% if page_type == 'Update' %}
+        <h3><strong>Edit Objective: {{ objective.objective }}</strong> </h3>
+    {% else %}
+        <h3><strong>Create An Objective</strong></h3>
+    {% endif %}
+    </section>
+    <section class="media content-section">
+    {% if form.errors %}
+        <article class="media content-section alert-section">
+            <div>
+            <p class="alert-danger">Please review the following:</p>
+                <ul>
+                {% for key, value in form.errors.items %}
+                    {% for error in value %}
+                        {% if error != '' %}
+                            <li class="alert-danger">{{ error }}</li>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                </ul>
+            </div>
+        </article>
+    {% endif %}
+        <form method="post" action="" enctype="multipart/form-data" class="text-CCL-Gold">
+            {% csrf_token %}
+            {{ form.media }}
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form.objective|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form.service_group|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form.objective_development_template|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form.opportunity_statement|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form.objective_statement|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form.awareness|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form.clarity|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form.emergence|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    {{ form.discipline|as_crispy_field }}
+                </div>
+            </div>
+        <div class="row pb-2">
+            <div class="col-sm-12">
+
+                {% if page_type == 'Update' %}
+                    <a href="{% url 'objective' objective.id %}" class="btn btn-outline-CCL-Blue col-sm-2">Go Back</a>
+                    <input type="submit" value="Update Objective" class="btn btn-CCL-Blue float-end col-sm-2">
+                {% else %}
+                    <a href="{% url 'objectives' %}" class="btn btn-outline-CCL-Blue col-sm-2">Go Back</a>
+                    <input type="submit" value="Add Objective" class="btn btn-CCL-Blue float-end col-sm-2">
+                {% endif %}
+            </div>
+        </div>
+        </form>
+    </section>
+{% endblock %}
