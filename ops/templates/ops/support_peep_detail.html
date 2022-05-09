@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    PEeP entry: {{ peep.process_function }}
+{% endblock %}
+{% block content %}
+    <article class="media content-section">
+        <div class="media-body">
+            <h4 class="article-title pb-2 pt-2">
+            {% if user.is_superuser %}
+                <strong>Process Function: {{ peep.process_function }}</strong> <a href="{% url 'support-peep-update' peep.id %}" class="text-CCL-Blue"><i class="far fa-plus-square h5-plus"></i></a><a href="{% url 'support-peep-delete' peep.id %}" class="text-danger float-end"><i class="far fa-times-circle h5-plus"></i></a>
+            {% elif user.is_staff %}
+                <strong>Process Function: {{ peep.process_function }}</strong> <a href="{% url 'support-peep-update' peep.id %}" class="text-CCL-Blue"><i class="far fa-plus-square h5-plus"></i></a>
+            {% endif %}
+            </h4>
+        </div>
+    </article>
+    <article class="media content-section">
+        <div class="row pt-2">
+            <div class="col-sm-6">
+                <p><strong>Process Code: </strong>{{ peep.process_code }}</p>
+            </div>
+            <div class="col-sm-6">
+                <p><strong>Whurthy Team: </strong>{{ peep.whurthy_team }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <p><strong>Responsible: </strong>{{ peep.responsible }}</p>
+            </div>
+            <div class="col-sm-6">
+                <p><strong>Display Name: </strong>{{ peep.display_name }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p><strong>Detailed Description:</strong></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col padding-below-element">
+                {{ peep.detailed_description|safe }}
+            </div>
+        </div>
+        <div class="row pb-2 pt-4">
+            <div class="col-sm-3">
+                <a href="{% url 'support-peeps' %}" class="btn btn-outline-BlueGray col-12">Go Back to PEePs</a>
+            </div>
+        </div>
+    </article>
+{% endblock %}

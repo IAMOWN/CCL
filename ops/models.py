@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.utils import timezone
 
 from tinymce.models import HTMLField
 
@@ -18,6 +19,49 @@ OBJECTIVE_DEVELOPMENT_CHOICES = [
     ('1) Simple', '1) Simple'),
     ('2) Descriptive', '2) Descriptive'),
     ('3) Change', '3) Change'),
+]
+OBJECTIVE_STATUS = [
+    ('1) Not started', '1) Not started'),
+    ('2) In progress', '2) In progress'),
+    ('3) Deferred', '3) Deferred'),
+    ('3) Complete', '3) Complete'),
+    ('Cancelled', 'Cancelled'),
+]
+TASK_STATUS_CHOICES = [
+    ('1) Not started', '1) Not started'),
+    ('2) In progress', '2) In progress'),
+    ('3) Deferred', '3) Deferred'),
+    ('Completed', 'Completed'),
+]
+WHURTHY_TEAM_CHOICES = [
+    ('Finance', 'Finance'),
+    ('Operations', 'Operations'),
+    ('People', 'People'),
+    ('Product Management', 'Product Management'),
+    ('Sales', 'Sales'),
+    ('Support', 'Support'),
+]
+APPLICATION_CHOICES = [
+    ('CCL', 'CCL'),
+    ('Events', 'Events'),
+    ('Ops', 'Ops'),
+    ('Users', 'Users'),
+    ('CCL', 'CCL'),
+    ('Other', 'Other'),
+]
+TASK_PRIORITY_CHOICES = [
+    ('1) High', '1) High'),
+    ('2) Normal', '2) Normal'),
+    ('3) Low', '3) Low'),
+]
+TASK_TYPE_CHOICES = [
+    ('---', '---'),
+    ('Prepayment', 'Prepayment'),
+    ('Wait List', 'Wait List'),
+    ('Survey', 'Survey'),
+    ('ALAN', 'ALAN'),
+    ('Cancellation Request', 'Cancellation Request'),
+    ('Cancellation Action', 'Cancellation Action'),
 ]
 
 
@@ -95,6 +139,11 @@ class Objective(models.Model):
         on_delete=models.PROTECT,
         null=True,
         blank=True,
+    )
+    objective_status = models.CharField(
+        max_length=20,
+        choices=OBJECTIVE_STATUS,
+        default='1) Not started',
     )
     objective_development_template = models.CharField(
         max_length=20,
@@ -214,3 +263,126 @@ class Objective(models.Model):
 
     def get_absolute_url(self):
         return reverse('objective', kwargs={'pk': self.pk})
+
+
+# ####################### PEeP #######################
+class PEeP(models.Model):
+    """
+    PEeP (Process Expertise Profile model. Captures Team members by function/responsibility for task
+    assignment. Related to User as each entry relates to a Team member.
+    """
+    process_function = models.CharField(
+        unique=True,
+        max_length=50,
+        default='',
+        help_text='Enter the Team member job title or functional activity. Note: Whurthy will only be able to act on '
+                  'this record if the applicable feature has been built into the application. However, please feel free '
+                  'to enter PEeP records for your own reference, and to identify future automation opportunities.'
+    )
+    process_code = models.CharField(
+        max_length=20,
+        default='',
+        help_text="Enter the process code for this process activity. The recommended format should be abbreviations of "
+                  "the organization's name and the process name. For example, the Whurthy employee on-boarding "
+                  "process could have the process code of LFON. There is a limit of 20 characters for the Process Code."
+    )
+    responsible = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+    display_name = models.CharField(
+        max_length=30,
+        default='',
+    )  # Display name may be redundant - replace with Profile.first_name and Profile.last_name
+    supervisor = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='PEeP_entry_supervisor',
+    )
+    whurthy_team = models.CharField(
+        max_length=50,
+        choices=WHURTHY_TEAM_CHOICES,
+    )
+    detailed_description = models.TextField(
+        null=True,
+        blank=True,
+    )
+    date_created = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.process_function
+
+    class Meta:
+        ordering = [
+            'whurthy_team',
+            'process_code',
+            'date_created',
+        ]
+        verbose_name_plural = 'PEeP'
+        verbose_name = 'PEeP'
+
+
+# ####################### LEE #######################
+class LEE(models.Model):
+    """
+    Learned Experience Engine model. Captures process descriptions for tasks and form errors.
+    """
+    process_role = models.CharField(
+        max_length=100,
+        default='',
+        unique=True,
+        help_text='Enter the specific task name. This should not be changed once it has been coded into the Whurthy '
+                  'application, as it will be used in task assignment.'
+    )
+    whurthy_application = models.CharField(
+        max_length=100,
+        default='PIPS',
+        choices=APPLICATION_CHOICES,
+        help_text='Please select the application that this entry applies to.'
+    )
+    relevant_file = models.CharField(
+        default='events/ views.py',
+        max_length=100,
+        null=True,
+        blank=True,
+        help_text='If applicable, enter the specific file path and file name.'
+    )
+    process_description = models.TextField(
+        default='',
+        help_text='Enter the process description for the task. Whatever is entered into this field will be the '
+                  'process description provided for the task assignment/notification to the assignee.'
+    )
+    entry_owner = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='lEE_entry_owner'
+    )
+    process_code = models.CharField(
+        max_length=10,
+        default='WEVENT',
+        help_text="Enter the process code for this process activity. The recommended format should be abbreviations of "
+                  "the organization's name and the process name. For example, the Whurthy employee on-boarding "
+                  "process could have the process code of WON. There is a limit of 10 characters for the Process Code."
+    )
+    process_outcome = models.TextField(
+        null=True,
+        blank=True,
+        help_text='If applicable, enter a description of the outcome of the process.'
+    )
+    date_created = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'{self.process_role} ({self.whurthy_application})'
+
+    class Meta:
+        ordering = [
+            'process_role'
+        ]
+        verbose_name_plural = 'LEE'
+        verbose_name = 'LEE'

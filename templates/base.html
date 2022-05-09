@@ -113,6 +113,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="{% url 'service-groups' %}">Service Groups</a>
                                 <a class="dropdown-item" href="{% url 'objectives' %}">Objectives</a>
+                                <a class="dropdown-item" href="#">Tasks</a>
                             </div>
                         </li>
                         <li class="dropdown pe-4 pt-1">
@@ -120,12 +121,11 @@
                               Operations
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="{% url 'service-groups' %}">Service Groups</a>
-                                <a class="dropdown-item" href="#">Objectives</a>
-                                <a class="dropdown-item" href="#">Tasks</a>
                                 <a class="dropdown-item" href="#">Dashboard</a>
                                 {% if user.is_staff %}<a class="dropdown-item" href="{% url 'tags' %}">Library Tags</a>{% endif %}
                                 {% if user.is_staff %}<a class="dropdown-item" href="{% url 'authors' %}">Library Authors</a>{% endif %}
+                                {% if user.is_staff %}<a class="dropdown-item" href="{% url 'support-lee' %}">LEE</a>{% endif %}
+                                {% if user.is_staff %}<a class="dropdown-item" href="{% url 'support-peeps' %}">PEePs</a>{% endif %}
                                 <a class="dropdown-item" href="{% url "admin:index" %}">Back-Office Admin</a>
                             </div>
                         </li>

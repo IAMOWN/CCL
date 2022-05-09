@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Process Expertise Profile (PEeP)
+{% endblock %}
+{% block content %}
+    <div class="content-section">
+        <div class="media">
+            <h3><strong>Process Expertise Profile (PEeP)</strong></h3>
+        </div>
+    </div>
+    {% if user.is_superuser %}
+    <div class="content-section">
+        <div class="media-body pt-2 pb-2">
+            <div class="row">
+                <div class="col-sm-3">
+                    <a class="btn btn-CCL-Blue col-12" href="{% url 'support-peep-create' %}">Create PEeP Entry</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    <div class="content-section">
+        <div class="media pb-2">
+            <h5><strong>Filter PEePs</strong></h5>
+            <form method="get" class="pb-2">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <button type="submit" class="btn btn-outline-CCL-Blue col-12">Filter PEePs</button>
+                    </div>
+                    <div class="col-sm-3">
+                        <input
+                                type="text"
+                                name="search-area"
+                                class="button-margin-tlr form-control"
+                                value="{{ search_input }}"
+                                placeholder="by Process Function"
+                        >
+                    </div>
+                    <div class="col-sm-3">
+                        <input
+                                type="text"
+                                name="resp-search-area"
+                                class="button-margin-tlr form-control"
+                                value="{{ function_search_input }}"
+                                placeholder="by Responsible"
+                        >
+                    </div>
+                    <div class="col-sm-3">
+                        <input
+                                type="text"
+                                name="super-search-area"
+                                class="button-margin-tlr form-control"
+                                value="{{ super_search_input }}"
+                                placeholder="by Supervisor"
+                        >
+                    </div>
+                </div>
+            </form>
+            {% if not search_off %}
+                {% if search_type == 'Function' %}
+                    {% if search_count == 0 %}
+                        <p class="text-danger">There are no entries with "{{ search_entered }}" in Process Function.</p>
+                    {% else %}
+                        <p class="text-success">{% if search_count == 1 %}There is{% else %}Below are{% endif %}  {{ search_count }} entr{% if search_count == 1 %}y{% else %}ies{% endif %} with "{{ search_entered }}" in Process Function in PEeP.</p>
+                    {% endif %}
+                {% elif search_type == 'Resp' %}
+                    {% if search_count == 0 %}
+                        <p class="text-danger">There are no entries with "{{ search_entered }}" in Responsible.</p>
+                    {% else %}
+                        <p class="text-success">{% if search_count == 1 %}There is{% else %}Below are{% endif %}  {{ search_count }} entr{% if search_count == 1 %}y{% else %}ies{% endif %} with "{{ search_entered }}" in Responsible in PEeP.</p>
+                    {% endif %}
+                {% elif search_type == 'Supervisor' %}
+                    {% if search_count == 0 %}
+                        <p class="text-danger">There are no entries with "{{ search_entered }}" in Supervisor.</p>
+                    {% else %}
+                        <p class="text-success">{% if search_count == 1 %}There is{% else %}Below are{% endif %}  {{ search_count }} entr{% if search_count == 1 %}y{% else %}ies{% endif %} with "{{ search_entered }}" in Supervisor in PEeP.</p>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <section class="media content-section">
+        <div class="row">
+            <div class="col-sm-3">
+                <h6><strong>Process Function</strong></h6>
+            </div>
+            <div class="col-sm-3">
+                <h6><strong>Responsible</strong></h6>
+            </div>
+            <div class="col-sm-3">
+                <h6><strong>Detailed Description</strong></h6>
+            </div>
+        </div>
+    </section>
+    {% for peep in peeps %}
+    <section class="list-group-item list-group-item-light {% cycle 'row1' 'row2' %}">
+        <div class="row">
+            <div class="col-sm-3">
+                {% if user.is_superuser %}
+                    <h6><a href="{% url 'support-peep-entry' peep.id %}" class="text-CCL-Blue"><strong>{{ peep.process_function }}</strong></a> <a href="{% url 'support-peep-update' peep.id %}" class="text-CCL-Blue mt-1"><i class="far fa-plus-square h6-plus"></i></a></h6>
+                {% elif user.is_staff %}
+                    <h6><a href="{% url 'support-peep-entry' peep.id %}" class="text-CCL-Blue"><strong>{{ peep.process_function }}</strong></a>
+                {% endif %}
+            </div>
+            <div class="col-sm-3">
+                {{ peep.display_name }}
+            </div>
+            <div class="col-sm-5">
+                {{ peep.detailed_description|safe }}
+            </div>
+            <div class="col-sm-1">
+                {% if user.is_superuser %}
+                <a href="{% url 'support-peep-delete' peep.id %}" class="delete-link float-end mt-1"><i class="far fa-times-circle h6-plus"></i></a>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    {% endfor %}
+    <p class="pb-2"></p>
+{% endblock %}

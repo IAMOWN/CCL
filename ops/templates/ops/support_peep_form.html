@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% block title %}
+    {% if page_type == 'Update' %}
+        Edit PEeP entry
+    {% else %}
+        Create PEeP entry
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <section class="media content-section pb-2">
+        {% if page_type == 'Update' %}
+            <h3><strong>Edit PEeP entry</strong></h3>
+        {% else %}
+            <h3><strong>Create PEeP entry</strong></h3>
+        {% endif %}
+    </section>
+    <section class="media content-section pb-2 text-CCL-Gold">
+        <form method="post" action="" enctype="multipart/form-data" class="pb-2">
+            {% csrf_token %}
+            {{ form.media }}
+            <div class="row">
+                <div class="col-sm-3">
+                {% if user.is_superuser %}
+                    {{ form.process_function|as_crispy_field }}
+                {% elif user.is_staff %}
+                    <p>Process Function</p>
+                    <strong>{{ process_function }}</strong>
+                    {{ form.process_function.as_hidden }}
+                {% endif %}
+                </div>
+                <div class="col-sm-3">
+                    {{ form.process_code|as_crispy_field }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form.detailed_description|as_crispy_field }}
+                </div>
+            </div>
+        <hr>
+            <div class="row">
+                <div class="col-sm-3">
+                    {{ form.responsible|as_crispy_field }}
+                </div>
+                <div class="col-sm-3">
+                    {{ form.display_name|as_crispy_field }}
+                </div>
+                <div class="col-sm-3">
+                    {{ form.whurthy_team|as_crispy_field }}
+                </div>
+                <div class="col-sm-3">
+                    {{ form.supervisor|as_crispy_field }}
+                </div>
+            </div>
+            <div class="row pt-4">
+                <div class="col-sm-2">
+                    <a href="{% url 'support-peeps' %}" class="btn btn-outline-CCL-Blue col-12">Go Back</a>
+                </div>
+                <div class="col-sm-8">
+                </div>
+                <div class="col-sm-2">
+                    <input type="submit" value="Update PEeP Entry" class="btn btn-CCL-Blue float-end col-12">
+                </div>
+            </div>
+        </form>
+    </section>
+{% endblock %}
