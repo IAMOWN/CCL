@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
     <div class="content-section">
-        <div class="media-body">
+        <div class="media-body pt-2">
             <div>
                 <h3><strong>Learned Experience Engine (LEE)</strong></h3>
             </div>
@@ -106,25 +106,16 @@
     <section class="list-group-item list-group-item-light {% cycle 'row1' 'row2' %}">
         <div class="row">
             <div class="col-sm-5">
-            {% if user.is_superuser %}
-                <h6><a href="{% url 'support-lee-entry' LEE_entry.id %}" class="text-CCL-Blue"><strong>{{ LEE_entry.process_role }}</strong></a> <a href="{% url 'support-lee-update' LEE_entry.id %}" class="text-success pt-2"><i class="far fa-plus-square h6-plus"></i></a></h6>
-            {% elif user.is_staff %}
-                <h6><a href="{% url 'support-lee-entry' LEE_entry.id %}" class="text-CCL-Blue"><strong>{{ LEE_entry.process_role }}</strong></a>
-            {% endif %}
+                <p><a href="{% url 'support-lee-entry' LEE_entry.id %}" class="text-CCL-Blue"><strong>{{ LEE_entry.process_role }}</strong></a>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-2 text-CCL-Gold">
                 {{ LEE_entry.whurthy_application }}
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-2 text-CCL-Gold">
                 {{ LEE_entry.entry_owner }}
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-3 text-CCL-Gold">
                 {{ LEE_entry.process_code }}
-            </div>
-            <div class="col-sm-1">
-            {% if user.is_superuser %}
-                <a href="{% url 'support-lee-delete' LEE_entry.id %}" class="delete-link float-end mt-1"><i class="far fa-times-circle h6-plus"></i></a>
-            {% endif %}
             </div>
         </div>
     </section>

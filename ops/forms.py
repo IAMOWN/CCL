@@ -159,6 +159,7 @@ class CreatePEePForm(forms.ModelForm):
             'display_name',
             'supervisor',
             'whurthy_team',
+            'service_group',
             'detailed_description',
         ]
 
@@ -181,6 +182,7 @@ class UpdatePEePForm(forms.ModelForm):
             'display_name',
             'supervisor',
             'whurthy_team',
+            'service_group',
             'detailed_description',
         ]
 

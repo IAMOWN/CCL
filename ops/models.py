@@ -307,6 +307,13 @@ class PEeP(models.Model):
         max_length=50,
         choices=WHURTHY_TEAM_CHOICES,
     )
+    service_group = models.ForeignKey(
+        ServiceGroup,
+        related_name='PEeP_service_group',
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+    )
     detailed_description = models.TextField(
         null=True,
         blank=True,

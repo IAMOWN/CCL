@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %}
     <div class="content-section">
-        <div class="media">
+        <div class="media pt-2">
             <h3><strong>Process Expertise Profile (PEeP)</strong></h3>
         </div>
     </div>
@@ -94,25 +94,16 @@
         </div>
     </section>
     {% for peep in peeps %}
-    <section class="list-group-item list-group-item-light {% cycle 'row1' 'row2' %}">
+    <section class="list-group-item list-group-item-light {% cycle 'row1' 'row2' %} text-CCL-Gold">
         <div class="row">
             <div class="col-sm-3">
-                {% if user.is_superuser %}
-                    <h6><a href="{% url 'support-peep-entry' peep.id %}" class="text-CCL-Blue"><strong>{{ peep.process_function }}</strong></a> <a href="{% url 'support-peep-update' peep.id %}" class="text-CCL-Blue mt-1"><i class="far fa-plus-square h6-plus"></i></a></h6>
-                {% elif user.is_staff %}
-                    <h6><a href="{% url 'support-peep-entry' peep.id %}" class="text-CCL-Blue"><strong>{{ peep.process_function }}</strong></a>
-                {% endif %}
+                <p><a href="{% url 'support-peep-entry' peep.id %}" class="text-CCL-Blue"><strong>{{ peep.process_function }}</strong></a>
             </div>
             <div class="col-sm-3">
                 {{ peep.display_name }}
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-6">
                 {{ peep.detailed_description|safe }}
-            </div>
-            <div class="col-sm-1">
-                {% if user.is_superuser %}
-                <a href="{% url 'support-peep-delete' peep.id %}" class="delete-link float-end mt-1"><i class="far fa-times-circle h6-plus"></i></a>
-                {% endif %}
             </div>
         </div>
     </section>

@@ -7,15 +7,11 @@
     <article class="media content-section">
         <div class="media-body">
             <h4 class="article-title pb-2 pt-2">
-            {% if user.is_superuser %}
-                <strong>Process Function: {{ peep.process_function }}</strong> <a href="{% url 'support-peep-update' peep.id %}" class="text-CCL-Blue"><i class="far fa-plus-square h5-plus"></i></a><a href="{% url 'support-peep-delete' peep.id %}" class="text-danger float-end"><i class="far fa-times-circle h5-plus"></i></a>
-            {% elif user.is_staff %}
-                <strong>Process Function: {{ peep.process_function }}</strong> <a href="{% url 'support-peep-update' peep.id %}" class="text-CCL-Blue"><i class="far fa-plus-square h5-plus"></i></a>
-            {% endif %}
+                <strong>Process Function: {{ peep.process_function }}</strong>
             </h4>
         </div>
     </article>
-    <article class="media content-section">
+    <article class="media content-section text-CCL-Gold">
         <div class="row pt-2">
             <div class="col-sm-6">
                 <p><strong>Process Code: </strong>{{ peep.process_code }}</p>
@@ -43,9 +39,21 @@
             </div>
         </div>
         <div class="row pb-2 pt-4">
-            <div class="col-sm-3">
-                <a href="{% url 'support-peeps' %}" class="btn btn-outline-BlueGray col-12">Go Back to PEePs</a>
+            <div class="col-sm-2">
+                <a href="{% url 'support-peeps' %}" class="btn btn-outline-CCL-Blue col-12">Go Back</a>
             </div>
+            {% if user.is_staff %}
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2 text-center pb-2">
+                <a href="{% url 'support-peep-update' peep.id %}" class="btn btn-CCL-Blue col-12">Edit PEeP Entry</a>
+            </div>
+            {% endif %}
+            {% if user.is_superuser %}
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2 pb-2">
+                <a href="{% url 'support-peep-delete' peep.id %}" class="btn btn-outline-danger col-12">Delete PEeP Entry</a>
+            </div>
+            {% endif %}
         </div>
     </article>
 {% endblock %}

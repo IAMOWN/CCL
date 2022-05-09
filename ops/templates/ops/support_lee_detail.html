@@ -16,17 +16,9 @@
     {% endif %}
 
     <section class="media content-section">
-        <div class="row">
-            <div class="col">
-            {% if user.is_superuser %}
-                <h3><strong>Process Role: {{ LEE.process_role }}</strong> <a href="{% url 'support-lee-update' LEE.id %}" class="text-CCL-Blue"><i class="far fa-plus-square h5-plus"></i></a><a href="{% url 'support-lee-delete' LEE.id %}" class="text-danger float-end"><i class="far fa-times-circle h5-plus"></i></a></h3>
-            {% elif user.is_staff %}
-                <h3><strong>Process Role: {{ LEE.process_role }}</strong> <a href="{% url 'support-lee-update' LEE.id %}" class="text-CCL-Blue"><i class="far fa-plus-square h5-plus"></i></a>
-            {% endif %}
-            </div>
-        </div>
+        <h3><strong>Process Role: {{ LEE.process_role }}</strong></h3>
     </section>
-    <section class="media content-section">
+    <section class="media content-section text-CCL-Gold">
         <div class="row">
             <div class="col-sm-6">
                 <p><strong>Whurthy Application: </strong>{{ LEE.whurthy_application }}</p>
@@ -61,6 +53,18 @@
             <div class="col-sm-2 pb-2">
                 <a href="{% url 'support-lee' %}" class="btn btn-outline-CCL-Blue col-12">Go Back</a>
             </div>
+            {% if user.is_staff %}
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2 text-center pb-2">
+                <a href="{% url 'support-lee-update' LEE.id %}" class="btn btn-CCL-Blue col-12">Edit LEE Entry</a>
+            </div>
+            {% endif %}
+            {% if user.is_superuser %}
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2 pb-2">
+                <a href="{% url 'support-lee-delete' LEE.id %}" class="btn btn-outline-danger col-12">Delete LEE Entry</a>
+            </div>
+            {% endif %}
         </div>
     </section>
 {% endblock %}
