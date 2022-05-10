@@ -4,6 +4,7 @@ from bootstrap_datepicker_plus.widgets import DatePickerInput
 
 from .models import (
     Tag,
+    DiscourseSeries,
     CosmicAuthor,
     LibraryRecord,
 )
@@ -14,10 +15,21 @@ from users.models import User
 # ############ Tag form validation logic ############
 def tag_form_validation(form, form_type):
     cleaned_data = super(form_type, form).clean()
-    if cleaned_data.get('service_group') is None:
+    if cleaned_data.get('tag') is None:
         form.add_error(
             'tag',
             'A tag must be entered.'
+        )
+    return
+
+
+# ############ Discourse Series form validation logic ############
+def discourse_series_form_validation(form, form_type):
+    cleaned_data = super(form_type, form).clean()
+    if cleaned_data.get('discourse_series') is None:
+        form.add_error(
+            'discourse_series',
+            'A discourse series title must be entered.'
         )
     return
 
@@ -82,6 +94,34 @@ class UpdateTagForm(forms.ModelForm):
         return self.cleaned_data
 
 
+# ####################### Create Discourse Series Form #######################
+class CreateDiscourseSeriesForm(forms.ModelForm):
+
+    class Meta:
+        model = DiscourseSeries
+        fields = [
+            'discourse_series',
+        ]
+
+    def clean(self):
+        discourse_series_form_validation(self, CreateDiscourseSeriesForm)
+        return self.cleaned_data
+
+
+# ####################### Update Discourse Series Form #######################
+class UpdateDiscourseSeriesForm(forms.ModelForm):
+
+    class Meta:
+        model = DiscourseSeries
+        fields = [
+            'discourse_series',
+        ]
+
+    def clean(self):
+        discourse_series_form_validation(self, UpdateDiscourseSeriesForm)
+        return self.cleaned_data
+
+
 # ####################### Create Cosmic Author Form #######################
 class CreateCosmicAuthorForm(forms.ModelForm):
 
@@ -119,7 +159,7 @@ class CreateLibraryRecordForm(forms.ModelForm):
             'library_record_type',
             'title',
             'part_number',
-            'series_title',
+            'discourse_series',
             'invocation',
             'body',
             'text',
@@ -150,7 +190,7 @@ class UpdateLibraryRecordForm(forms.ModelForm):
             'library_record_type',
             'title',
             'part_number',
-            'series_title',
+            'discourse_series',
             'invocation',
             'body',
             'text',

@@ -15,8 +15,11 @@
     {% endif %}
     <section class="media content-section text-CCL-Gold">
         <div class="row pt-2">
-            <div class="col-sm-12">
-                <h3><strong>Author: {{ author.author }} <a href="{% url 'author-update' author.id %}" class="pb-2 text-CCL-Blue"><i class="far fa-plus-square h5-plus"></i></a>{% if user.is_superuser %}<a href="{% url 'author-delete' author.id %}" class="delete-link float-end pt-2"><i class="far fa-times-circle h5-plus"></i></a>{% endif %}</strong></h3>
+            <div class="col-sm-10">
+                <h3><strong>Author: {{ author.author }}</strong></h3>
+            </div>
+            <div class="col-sm-2">
+                <a href="{% url 'library-records' %}" class="btn btn-outline-CCL-Blue col-12">Library Records</a>
             </div>
         </div>
     </section>
@@ -25,6 +28,18 @@
             <div class="col-sm-2">
                 <a href="{% url 'authors' %}" class="btn btn-outline-CCL-Blue col-12">Go Back</a>
             </div>
+            {% if user.is_staff %}
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2 text-center">
+                <a href="{% url 'author-update' author.id %}" class="btn btn-CCL-Blue col-12">Edit Author</a>
+            </div>
+            {% endif %}
+            {% if user.is_superuser %}
+            <div class="col-sm-3"></div>
+            <div class="col-sm-2">
+                <a href="{% url 'author-delete' author.id %}" class="btn btn-outline-danger col-12">Delete Authord</a>
+            </div>
+            {% endif %}
         </div>
     </section>
 {% endblock %}

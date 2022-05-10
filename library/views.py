@@ -15,11 +15,14 @@ from .models import (
     Tag,
     CosmicAuthor,
     LibraryRecord,
+    DiscourseSeries,
 )
 
 from .forms import (
     CreateTagForm,
     UpdateTagForm,
+    CreateDiscourseSeriesForm,
+    UpdateDiscourseSeriesForm,
     CreateCosmicAuthorForm,
     UpdateCosmicAuthorForm,
     CreateLibraryRecordForm,
@@ -65,9 +68,10 @@ class TagCreate(LoginRequiredMixin, CreateView):
     model = Tag
     form_class = CreateTagForm
     template_name = 'library/tag_form.html'
+    reverse_lazy('tags')
 
     def form_valid(self, form):
-        message = form.instance.service_group
+        message = form.instance.tag
         messages.add_message(
             self.request,
             messages.SUCCESS,
@@ -115,6 +119,89 @@ class TagDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return context
 
 
+# ####################### DISCOURSE SERIES VIEWS #######################
+class DiscourseSeriesList(LoginRequiredMixin, ListView):
+    model = DiscourseSeries
+    template_name = 'library/discourse_series.html'
+    context_object_name = 'discourse_series'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['year'] = get_current_year()
+        context['title'] = 'Library Record Discourse Series Titles'
+
+        return context
+
+
+# ####################### Discourse Series - Detail View #######################
+class DiscourseSeriesDetail(LoginRequiredMixin, DetailView):
+    model = DiscourseSeries
+    template_name = 'library/discourse_series_detail.html'
+    context_object_name = 'discourse_series'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['year'] = get_current_year()
+        context['title'] = f"Discourse Series: {DiscourseSeries.objects.get(pk=self.kwargs['pk'])}"
+
+        return context
+
+
+# ####################### Discourse Series - Create View #######################
+class DiscourseSeriesCreate(LoginRequiredMixin, CreateView):
+    model = DiscourseSeries
+    form_class = CreateDiscourseSeriesForm
+    template_name = 'library/discourse_series_form.html'
+
+    def form_valid(self, form):
+        message = form.instance.discourse_series
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            f'The Discourse Series "{message}" has been added'
+        )
+        return super(DiscourseSeriesCreate, self).form_valid(form)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(DiscourseSeriesCreate, self).get_context_data(**kwargs)
+        context['page_type'] = 'Create'
+        context['year'] = get_current_year()
+
+        return context
+
+
+# ####################### Discourse Series - Update View #######################
+class DiscourseSeriesUpdate(LoginRequiredMixin, UpdateView):
+    model = DiscourseSeries
+    form_class = UpdateDiscourseSeriesForm
+    template_name = 'library/discourse_series_form.html'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(DiscourseSeriesUpdate, self).get_context_data(**kwargs)
+        context['page_type'] = 'Update'
+        context['year'] = get_current_year()
+
+        return context
+
+
+# ####################### Discourse Series - Delete View #######################
+class DiscourseSeriesDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = DiscourseSeries
+    template_name = 'library/discourse_series_confirm_delete.html'
+    success_url = reverse_lazy('discourse-series')
+
+    def test_func(self):
+        if self.request.user.is_superuser:
+            return True
+        return False
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(DiscourseSeriesDelete, self).get_context_data(**kwargs)
+        context['year'] = get_current_year()
+
+        return context
+
+
 # ####################### COSMIC AUTHOR VIEWS #######################
 class CosmicAuthorList(LoginRequiredMixin, ListView):
     model = CosmicAuthor
@@ -138,7 +225,7 @@ class CosmicAuthorDetail(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['year'] = get_current_year()
-        context['title'] = f"Tag: {CosmicAuthor.objects.get(pk=self.kwargs['pk'])}"
+        context['title'] = f"Cosmic Author: {CosmicAuthor.objects.get(pk=self.kwargs['pk'])}"
 
         return context
 

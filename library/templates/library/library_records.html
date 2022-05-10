@@ -14,13 +14,26 @@
             </div>
         </div>
     </section>
+    {% if user.is_authenticated %}
     <section class="media content-section">
         <div class="row">
             <div class="col-sm-3 pb-2 pt-2">
                 <a class="btn btn-CCL-Blue col-12" href="{% url 'library-record-create' %}">Add A Library Record</a>
             </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-2 pb-2 pt-2">
+                <a class="btn btn-outline-CCL-Blue col-12" href="{% url 'discourse-series-create' %}">Add A Series Title</a>
+            </div>
+            <div class="col-sm-2 pb-2 pt-2">
+                <a class="btn btn-outline-CCL-Blue col-12" href="{% url 'author-create' %}">Add An Author</a>
+            </div>
+            <div class="col-sm-1"></div>
+            <div class="col-sm-3 pb-2 pt-2">
+                <a class="btn btn-outline-CCL-Blue col-12" href="{% url 'tag-create' %}">Add A Tag</a>
+            </div>
         </div>
     </section>
+    {% endif %}
     <section class="media content-section text-CCL-Gold d-none d-xl-block">
         <div class="row pt-2">
             <div class="col-sm-4">
@@ -33,16 +46,16 @@
                 <h6><strong>Principal Author</strong></h6>
             </div>
             <div class="col-sm-3">
-                <h6><strong>Date Communicated</strong></h6>
+                <h6><strong>Tags</strong></h6>
             </div>
         </div>
     </section>
     {% for record in library_records %}
     <section class="list-group-item list-group-item-light {% cycle 'row1' 'row2' %} text-CCL-Gold">
-        <div class="row pt-2">
+        <div class="row pt-2 pb-2">
             <div class="col-sm-4">
                 {% if record.library_record_type == 'Discourse' %}
-                <p><strong><a href="{% url 'library-record' record.id %}" class="text-CCL-Blue">{{ record.part_number }} - {{ record.series_title }} - {{ record.title }}</a></strong></p>
+                <p><strong><a href="{% url 'library-record' record.id %}" class="text-CCL-Blue">Part {{ record.part_number }} - {{ record.discourse_series }} - {{ record.title }} - {{ record.date_communicated }}</a></strong></p>
                 {% else %}
                 <p><strong><a href="{% url 'library-record' record.id %}" class="text-CCL-Blue">{{ record.title }}</a></strong></p>
                 {% endif %}
@@ -54,7 +67,9 @@
                 <p>{{ record.principal_cosmic_author }}</p>
             </div>
             <div class="col-sm-3">
-                <p>{{ record.date_communicated }}</p>
+                {% for tag in record.tags.all %}
+                    {{ tag }};
+                {% endfor %}
             </div>
         </div>
     </section>

@@ -18,18 +18,21 @@
               $('#div_id_benediction').hide();
               $('#div_id_part_number').hide();
               $('#div_id_series_title').hide();
+              $('#div_id_discourse_series').hide();
             }
             else if ($(this).val() === "Book") {
               $('#div_id_invocation').hide();
               $('#div_id_benediction').hide();
               $('#div_id_part_number').hide();
               $('#div_id_series_title').hide();
+              $('#div_id_discourse_series').hide();
             }
             else if ($(this).val() === "Discourse") {
               $('#div_id_invocation').show();
               $('#div_id_benediction').show();
               $('#div_id_part_number').show();
               $('#div_id_series_title').show();
+              $('#div_id_discourse_series').show();
             }
           });
           $("#id_library_record_type").trigger("change")
@@ -38,11 +41,14 @@
 {% endblock %}
 {% block content %}
     <section class="media content-section">
-    {% if page_type == 'Update' %}
-        <h3><strong>Edit Library Record: {{ libraryrecord.title }}</strong> </h3>
-    {% else %}
-        <h3><strong>Create A Library Record</strong></h3>
-    {% endif %}
+        <div class="row">
+            <div class="col-sm-12 pt-2">
+            {% if page_type == 'Update' %}
+                <h3><strong>Edit Library Record: {{ libraryrecord.title }}</strong> </h3>
+            {% else %}
+                <h3><strong>Create A Library Record</strong></h3>
+            {% endif %}
+        </div>
     </section>
     <section class="media content-section">
     {% if form.errors %}
@@ -77,7 +83,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    {{ form.series_title|as_crispy_field }}
+                    {{ form.discourse_series|as_crispy_field }}
                 </div>
             </div>
             <div class="row">
@@ -87,7 +93,7 @@
             </div>
             <div class="row pb-2">
                 <div class="col-sm-12">
-                    {{ form.text }}
+                    {{ form.text|as_crispy_field }}
                 </div>
             </div>
             <div class="row">
@@ -123,15 +129,41 @@
                 </div>
             </div>
             <div class="row pt-4">
-                <div class="col-sm-12">
-                    {% if page_type == 'Update' %}
-                        <a href="{% url 'library-record' libraryrecord.id %}" class="btn btn-outline-CCL-Blue col-sm-2">Go Back</a>
-                        <input type="submit" value="Update Library Record" class="btn btn-CCL-Blue float-end col-sm-2">
-                    {% else %}
-                        <a href="{% url 'library-records' %}" class="btn btn-outline-CCL-Blue col-sm-2">Go Back</a>
-                        <input type="submit" value="Add Library Record" class="btn btn-CCL-Blue float-end col-sm-2">
-                    {% endif %}
+                {% if page_type == 'Update' %}
+                <div class="col-sm-2 pb-2 pt-2">
+                    <a href="{% url 'library-record' libraryrecord.id %}" class="btn btn-outline-CCL-Blue col-sm-12">Go Back</a>
                 </div>
+                <div class="col-sm-2 pb-2 pt-2">
+                    <a class="btn btn-outline-CCL-Blue col-12" href="{% url 'discourse-series-create' %}">Add A Series Title</a>
+                </div>
+                <div class="col-sm-2 pb-2 pt-2">
+                    <a class="btn btn-outline-CCL-Blue col-12" href="{% url 'author-create' %}">Add An Author</a>
+                </div>
+                <div class="col-sm-2 pb-2 pt-2">
+                    <a class="btn btn-outline-CCL-Blue col-12" href="{% url 'tag-create' %}">Add A Tag</a>
+                </div>
+                <div class="col-sm-2 pb-2 pt-2"></div>
+                <div class="col-sm-2 pb-2 pt-2">
+                    <input type="submit" value="Update Library Record" class="btn btn-CCL-Blue col-sm-12">
+                </div>
+                {% else %}
+                <div class="col-sm-2 pb-2 pt-2">
+                    <a href="{% url 'library-records' %}" class="btn btn-outline-CCL-Blue col-sm-2">Go Back</a>
+                </div>
+                <div class="col-sm-2 pb-2 pt-2">
+                    <a class="btn btn-outline-CCL-Blue col-12" href="{% url 'discourse-series-create' %}">Add A Series Title</a>
+                </div>
+                <div class="col-sm-2 pb-2 pt-2">
+                    <a class="btn btn-outline-CCL-Blue col-12" href="{% url 'author-create' %}">Add An Author</a>
+                </div>
+                <div class="col-sm-2 pb-2 pt-2">
+                    <a class="btn btn-outline-CCL-Blue col-12" href="{% url 'tag-create' %}">Add A Tag</a>
+                </div>
+                <div class="col-sm-2 pb-2 pt-2"></div>
+                <div class="col-sm-2 pb-2 pt-2">
+                    <input type="submit" value="Add Library Record" class="btn btn-CCL-Blue col-sm-12">
+                </div>
+                {% endif %}
             </div>
         </form>
     </section>

@@ -6,6 +6,11 @@ from .views import (
     TagCreate,
     TagUpdate,
     TagDelete,
+    DiscourseSeriesList,
+    DiscourseSeriesDetail,
+    DiscourseSeriesCreate,
+    DiscourseSeriesUpdate,
+    DiscourseSeriesDelete,
     CosmicAuthorList,
     CosmicAuthorDetail,
     CosmicAuthorCreate,
@@ -25,6 +30,13 @@ urlpatterns = [
     path('tag_create/', TagCreate.as_view(), name='tag-create'),
     path('tag_update/<int:pk>/', TagUpdate.as_view(), name='tag-update'),
     path('tag_delete/<int:pk>/', TagDelete.as_view(), name='tag-delete'),
+
+    # Discourse Series
+    path('discourse_seriess/', DiscourseSeriesList.as_view(), name='discourse-series'),
+    path('discourse_series/<int:pk>/', DiscourseSeriesDetail.as_view(), name='discourse-series-detail'),
+    path('discourse_series_create/', DiscourseSeriesCreate.as_view(), name='discourse-series-create'),
+    path('discourse_series_update/<int:pk>/', DiscourseSeriesUpdate.as_view(), name='discourse-series-update'),
+    path('discourse_series_delete/<int:pk>/', DiscourseSeriesDelete.as_view(), name='discourse-series-delete'),
 
     # Authors
     path('authors/', CosmicAuthorList.as_view(), name='authors'),

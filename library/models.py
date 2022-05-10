@@ -58,7 +58,7 @@ class Tag(models.Model):
 
     # Record metadata
     date_created = models.DateTimeField(
-        auto_now=True
+        auto_now_add=True
     )
 
     class Meta:
@@ -71,6 +71,33 @@ class Tag(models.Model):
 
     def get_absolute_url(self):
         return reverse('tag', kwargs={'pk': self.pk})
+
+
+# ####################### Discourse Series #######################
+class DiscourseSeries(models.Model):
+    """Discourse Series provides a list of series to support views and search"""
+    discourse_series = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True,
+        default='',
+    )
+
+    # Record metadata
+    date_created = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        ordering = [
+            'discourse_series',
+        ]
+
+    def __str__(self):
+        return self.discourse_series
+
+    def get_absolute_url(self):
+        return reverse('discourse-series-detail', kwargs={'pk': self.pk})
 
 
 # ####################### Library Record #######################
@@ -114,6 +141,14 @@ class LibraryRecord(models.Model):
         null=True,
         blank=True,
         default=''
+    )
+    discourse_series = models.ForeignKey(
+        DiscourseSeries,
+        related_name='discourse_series_title',
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        verbose_name='Discourse series title'
     )
     principal_cosmic_author = models.ForeignKey(
         CosmicAuthor,
@@ -168,7 +203,7 @@ class LibraryRecord(models.Model):
 
     def __str__(self):
         # return self.title
-        return f'Part {self.part_number} - {self.series_title} - {self.title} - {self.principal_cosmic_author} - {self.date_communicated}'
+        return f'Part {self.part_number} - {self.discourse_series} - {self.title} - {self.principal_cosmic_author} - {self.date_communicated}'
 
     def get_absolute_url(self):
         return reverse('library-record', kwargs={'pk': self.pk})
