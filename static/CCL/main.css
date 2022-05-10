@@ -377,7 +377,9 @@ a.text-CCL-Blue:hover, a.text-CCL-Blue:focus {
 }
 
 
-/* **** Navigation **** */
+/*------------------------------------
+- Bavigation
+------------------------------------*/
 .nav-item {
     padding: 0 9px;
 }
@@ -417,7 +419,7 @@ a.text-CCL-Blue:hover, a.text-CCL-Blue:focus {
     padding-bottom: .3125rem;
     margin-right: 1rem;
     font-family: 'Cinzel Decorative', serif;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     line-height: inherit;
     white-space: nowrap
 }
@@ -433,6 +435,7 @@ a.text-CCL-Blue:hover, a.text-CCL-Blue:focus {
     text-decoration: none;
     background-color: #6EC1E4
 }
+
 
 /*------------------------------------
 - Layout & Padding

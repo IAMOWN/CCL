@@ -13,15 +13,15 @@
             </div>
         </section>
     {% endif %}
-    <section class="media content-section text-CCL-Gold">
+    <section class="content-section text-CCL-Gold">
         <div class="row pt-2">
             <div class="col-sm-12">
                 <h3><strong>Objective: {{ objective.objective }}</strong></h3>
             </div>
         </div>
     </section>
-    <section class="media content-section text-CCL-Gold">
-        <div class="row">
+    <section class="content-section text-CCL-Gold">
+        <div class="row pt-2">
             <div class="col-sm-4">
                 <p><strong>Service Group:</strong> {{ objective.service_group }}</p>
             </div>
@@ -34,7 +34,7 @@
         </div>
     </section>
     {% if objective.objective_development_template == '2) Descriptive' or objective.objective_development_template == '3) Change' %}
-    <section class="media content-section text-CCL-Gold">
+    <section class="content-section text-CCL-Gold">
         <div class="row pt-2">
             <div class="col-sm-12">
                 <h5><strong>Description</strong></h5>
@@ -52,8 +52,31 @@
         </div>
     </section>
     {% endif %}
+    <section class="content-section text-CCL-Gold">
+        <div class="row pt-2">
+            <div class="col-sm-12">
+                <h5><strong>Tasks for this Objective</strong></h5>
+            </div>
+        </div>
+    {% if tasks_count == 0 %}
+        <div class="row pt-2 pb-2">
+            <div class="col-sm-12">
+                <span>There are currently no tasks for this objective.</span>
+            </div>
+        </div>
+    {% else %}
+    {% for task in tasks %}
+        <div class="row">
+            <div class="col-sm-12">
+                <span><strong>Task: <a href="{% url 'task' task.id %}" class="text-CCL-Blue">{{ task.task_title }}</a></strong></span><p>
+                <span class="small text-dark">Task status: {{ task.task_status }}</span>
+            </div>
+        </div>
+    {% endfor %}
+    {% endif %}
+    </section>
     {% if objective.objective_development_template == '3) Change' %}
-    <section class="media content-section text-CCL-Gold">
+    <section class="content-section text-CCL-Gold">
         <div class="row pt-2">
             <div class="col-sm-12">
                 <h5><strong>Change Management</strong></h5>
@@ -81,7 +104,7 @@
         </div>
     </section>
     {% endif %}
-    <section class="media content-section">
+    <section class="content-section">
         <div class="row pt-2">
             <div class="col-sm-2 pb-2">
                 <a href="{% url 'objectives' %}" class="btn btn-outline-CCL-Blue col-12">Go Back</a>

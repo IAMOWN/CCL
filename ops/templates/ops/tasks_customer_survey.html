@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load static %}
+{% block title %}
+    My Support Request Survey{{ survey_count|pluralize:'s' }}
+{% endblock %}
+{% block content %}
+    <section class="media content-section">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3><strong>My Support Request Survey{{ survey_count|pluralize:'s' }}</strong></h3>
+            </div>
+        </div>
+    </section>
+    <section class="media content-section">
+        <div class="row">
+            {% if survey_count > 0 %}
+            <div class="col-sm-12">
+                <p>Below {{ survey_count|pluralize:'is,are' }} your survey{{ survey_count|pluralize:'s' }}.</p>
+                <p>Completing {{ survey_count|pluralize:'this,these' }} survey{{ survey_count|pluralize:'s' }} really helps us in improving the services we offer to our customers.</p>
+            </div>
+            {% else %}
+            <div class="col-sm-12">
+                <p>You currently have no surveys to complete.</p>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+    {% for survey in surveys %}
+    <section class="list-group-item list-group-item-light {% cycle 'row1' 'row2' %}">
+        <div class="row pt-2 pb-2">
+            <div class="col-sm-12">
+                <p><a href="{% url 'task-update-survey' survey.id %}" class="text-BlueGray"><strong>{{ survey.task_title }}</strong></a></p>
+            </div>
+        </div>
+        <div class="row"></div>
+    </section>
+    {% endfor %}
+{% endblock %}

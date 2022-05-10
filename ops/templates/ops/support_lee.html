@@ -46,7 +46,7 @@
                                     name="code-search-area"
                                     class="button-margin-tlr form-control"
                                     value="{{ code_search_input }}"
-                                    placeholder="by Whurthy Application"
+                                    placeholder="by Application"
                             >
                         </div>
                         <div class="col-sm-3">
@@ -86,18 +86,15 @@
     </div>
     <div class="content-section">
         <div class="media-body">
-            <div class="row">
-                <div class="col-sm-5">
+            <div class="row pt-2">
+                <div class="col-sm-6">
                     <h6><strong>Process Role</strong></h6>
                 </div>
-                <div class="col-sm-2">
-                    <h6><strong>App</strong></h6>
+                <div class="col-sm-3">
+                    <h6><strong>Application</strong></h6>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <h6><strong>Entry Owner</strong></h6>
-                </div>
-                <div class="col-sm-2">
-                    <h6><strong>Process Code</strong></h6>
                 </div>
             </div>
         </div>
@@ -105,17 +102,14 @@
     {% for LEE_entry in LEE %}
     <section class="list-group-item list-group-item-light {% cycle 'row1' 'row2' %}">
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-6">
                 <p><a href="{% url 'support-lee-entry' LEE_entry.id %}" class="text-CCL-Blue"><strong>{{ LEE_entry.process_role }}</strong></a>
             </div>
-            <div class="col-sm-2 text-CCL-Gold">
+            <div class="col-sm-3 text-CCL-Gold">
                 {{ LEE_entry.whurthy_application }}
             </div>
-            <div class="col-sm-2 text-CCL-Gold">
-                {{ LEE_entry.entry_owner }}
-            </div>
             <div class="col-sm-3 text-CCL-Gold">
-                {{ LEE_entry.process_code }}
+                {{ LEE_entry.entry_owner }}
             </div>
         </div>
     </section>

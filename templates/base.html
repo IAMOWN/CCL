@@ -50,9 +50,9 @@
     <header class="site-header">
         <nav class="navbar navbar-expand-md navbar-dark">
 {#        <nav class="navbar navbar-expand-md navbar-dark fixed-top">#}
-            <div class="container">
+            <div class="container-xxl">
                 <!-- Navbar Logo -->
-                <a class="navbar-brand text-CCL-Gold pt-3" href="{% url 'home' %}">Cosmic Christ Love</a>
+                <a class="navbar-brand text-CCL-Gold pt-3" href="{% url 'home' %}"><strong>Cosmic Christ Love</strong></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -113,7 +113,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="{% url 'service-groups' %}">Service Groups</a>
                                 <a class="dropdown-item" href="{% url 'objectives' %}">Objectives</a>
-                                <a class="dropdown-item" href="#">Tasks</a>
+                                <a class="dropdown-item" href="{% url 'tasks' %}">Tasks</a>
                             </div>
                         </li>
                         <li class="dropdown pe-4 pt-1">
@@ -139,49 +139,54 @@
                                 <a class="dropdown-item" href="{% url 'password_reset' %}">Reset Password</a>
                             </div>
                         </li>
+                    </div>
                         {% else %}
-                        <li class="dropdown pe-4 pt-1">
+                    <div class="navbar-nav">
+                        <li class="dropdown pe-4 pt-2">
                             <a class="nav-link-gold dropdown-toggle navbarDropdownMenuLink" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Library
+                              EGA Discourses
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="#">EGA Books</a>
-                                <a class="dropdown-item" href="#">EGA Discourses</a>
-                                <a class="dropdown-item" href="#">'I AM' Freedom Discourses</a>
-                                <a class="dropdown-item" href="#">Book Store</a>
-                                <a class="dropdown-item" href="#">Free E-Books</a>
+                                <a class="dropdown-item" href="#">'I AM' Freedom Discourses'</a>
                                 <a class="dropdown-item" href="#">Divine Economy</a>
                                 <a class="dropdown-item" href="#">EGA Petitions</a>
-                                <a class="dropdown-item" href="#">Order of Melchizedek</a>
-                                <a class="dropdown-item" href="#">Other Teachings</a>
-                                <a class="dropdown-item" href="#">Cosmic Reviews</a>
+                                <a class="dropdown-item" href="#">All Discourses</a>
+                                {% if user.is_staff %}<a class="dropdown-item" href="{% url 'library-records' %}">Admin: Library Records</a>{% endif %}
                             </div>
                         </li>
-                        <li class="pe-2 pt-1">
-                            <a class="nav-link-gold" href="{% url 'register' %}" aria-haspopup="true" aria-expanded="false">Register</a>
-                        </li>
-                        {% endif %}
-{#                        <a class="nav-item nav-link" href="{% url 'about' %}">About</a>#}
+                        <a class="nav-link-gold pe-4 pt-2" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Free E-Books
+                        </a>
+                        <a class="nav-link-gold pe-4 pt-2" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Order of Melchizedek
+                        </a>
+                        <a class="nav-link-gold pe-4 pt-2" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Other Teachings
+                        </a>
+                        <a class="nav-link-gold pe-4 pt-2" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Cosmic Reviews
+                        </a>
+                        <a class="nav-link-gold pt-2" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Search
+                        </a>
                     </div>
+                        {% endif %}
                     <!-- Navbar Right Side -->
+                    {% if user.is_staff %}
                     <div class="navbar-nav ms-auto">
-                        {% if user.is_staff %}
-                            <span class="ps-2"><a class="nav-link-gold d-none d-xl-block text-decoration-none" href="#">Search</a></span>
-                            <a class="nav-link-gold d-xl-none" href="#">Search</a>
-                            <span class="ps-2"><a class="nav-link-gold ps-sm-4 d-none d-xl-block text-decoration-none" href="{% url 'logout' %}">Logout</a></span>
-                            <a class="nav-link-gold d-xl-none" href="{% url 'logout' %}">Logout</a>
-                        {% elif user.is_authenticated %}
-                            <span class="ps-2"><a class="nav-link-gold d-none d-xl-block text-decoration-none" href="#">Search</a></span>
-                            <a class="nav-link-gold d-xl-none" href="#">Search</a>
-                            <span class="ps-2"><a class="nav-link-gold p-sm-4 d-none d-xl-block text-decoration-none" href="{% url 'logout' %}">Logout</a></span>
-                            <a class="nav-link-gold d-xl-none" href="{% url 'logout' %}">Logout</a>
-                        {% else %}
-                            <span class="ps-2"><a class="nav-link-gold d-none d-xl-block text-decoration-none" href="#">Search</a></span>
-                            <a class="nav-link-gold d-xl-none" href="#">Search</a>
-                            <span class="ps-2"><a class="nav-link-gold ps-4 d-none d-xl-block text-decoration-none" href="{% url 'login' %}">Log In</a></span>
-                            <a class="nav-link-gold d-xl-none" href="{% url 'login' %}">Sign In</a>
-                        {% endif %}
+                        <span class="ps-2"><a class="nav-link-gold d-none d-xl-block text-decoration-none" href="#">Search</a></span>
+                        <a class="nav-link-gold d-xl-none" href="#">Search</a>
+                        <span class="ps-2"><a class="nav-link-gold ps-sm-4 d-none d-xl-block text-decoration-none" href="{% url 'logout' %}">Logout</a></span>
+                        <a class="nav-link-gold d-xl-none" href="{% url 'logout' %}">Logout</a>
+                    {% elif user.is_authenticated %}
+                        <span class="ps-2"><a class="nav-link-gold d-none d-xl-block text-decoration-none" href="#">Search</a></span>
+                        <a class="nav-link-gold d-xl-none" href="#">Search</a>
+                        <span class="ps-2"><a class="nav-link-gold p-sm-4 d-none d-xl-block text-decoration-none" href="{% url 'logout' %}">Logout</a></span>
+                        <a class="nav-link-gold d-xl-none" href="{% url 'logout' %}">Logout</a>
+{#                            <span class="ps-2"><a class="nav-link-gold ps-4 d-none d-xl-block text-decoration-none" href="{% url 'login' %}">Log In</a></span>#}
+{#                            <a class="nav-link-gold d-xl-none" href="{% url 'login' %}">Sign In</a>#}
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </nav>
@@ -234,7 +239,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0"></div>
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-                    <p class="text-white">©{{ year }} Copyright: Elemental Grace Alliance</p>
+{#                    <p class="text-white">©{{ year }} Copyright: Elemental Grace Alliance</p>#}
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0"></div>
             </div>

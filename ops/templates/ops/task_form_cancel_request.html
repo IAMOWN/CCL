@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+        Cancellation Request Approval
+{% endblock %}
+{% block content %}
+    <section class="media content-section">
+        <h3><strong>Cancellation Request Approval</strong></h3>
+    </section>
+    <section class="media content-section">
+        <div class="row">
+            <div class="col-sm-12">
+                <h5><strong>{{ object.task_title }}</strong></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>{{ object.task_description|safe }}</p>
+            </div>
+        </div>
+    </section>
+    <section class="media content-section">
+        {% if task.task_type == 'Cancellation Request' %}
+        <div class="row pt-2">
+            <div class="col-sm-12">
+                <h5><strong>Request Decision</strong></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    <strong>Cancel Request Decision: </strong>{{ task.cancel_request_decision }}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    <strong>Cancel Request Decision Comments:</strong><br>{{ task.cancel_request_decision_comments }}
+                </p>
+            </div>
+        </div>
+
+        {% elif task.task_type == 'Cancellation Action' %}
+        <div class="row pt-2">
+            <div class="col-sm-12">
+                <h5><strong>Request Decision</strong></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    <strong>Cancel Request Decision: </strong>{{ task.related_task.cancel_request_decision }}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    <strong>Cancel Request Decision Comments:</strong><br>{{ task.related_task.cancel_request_decision_comments }}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p class="text-success">
+                    <strong>Cancellation Reason:</strong><br>{{ task.related_task.cancellation_reason }}
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    <strong>Automated activity log: </strong><br>{{ task.automated_activity|safe }}
+                </p>
+            </div>
+        </div>
+        {% endif %}
+    </section>
+
+    <section class="media content-section">
+        <div class="row pt-2">
+            <div class="col-sm-12">
+                <h5><strong>Task Action</strong></h5>
+            </div>
+        </div>
+        <form method="post" action="" enctype="multipart/form-data" class="padding-below-element">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form|crispy }}
+            <div class="row pb-2 pt-2">
+                <div class="col-sm-3">
+                    <input type="submit" value="Complete Approval Task" class="btn btn-success col-12">
+                </div>
+            </div>
+        </form>
+    </section>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+        Support Survey Response
+{% endblock %}
+{% block content %}
+    <section class="media content-section">
+        <h3><strong>Support Survey Response</strong></h3>
+    </section>
+    <section class="media content-section">
+        <div class="row">
+            <div class="col-sm-12">
+                <h5><strong>Request Background</strong></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    You recently submitted a support request. We'd really appreciate hearing from you about how well we did.
+                </p>
+                <p>
+                    To refresh your memory, the original request you submitted, along with the answer from the Support Team, is below.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    <strong>Question: </strong>{{ object.support_fk.question }}
+                </p>
+            </div>
+        </div>
+        {% if object.support_fk.detailed_question_description %}
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    <strong>Detailed description: </strong>{{ object.support_fk.detailed_question_description }}
+                </p>
+            </div>
+        </div>
+        {% endif %}
+        {% if object.support_fk.reference %}
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    <strong>Reference: </strong>{{ object.support_fk.reference }}
+                </p>
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-sm-12">
+                <p>
+                    <strong>Answer: </strong>{{ object.support_fk.answer }}
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="media content-section">
+        <form method="post" action="" enctype="multipart/form-data" class="padding-below-element">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form|crispy }}
+            <div class="row pb-2 pt-2">
+                <div class="col-sm-12">
+                    <input type="submit" value="Submit Survey Response" class="btn btn-success col-sm-3">
+                </div>
+            </div>
+        </form>
+    </section>
+{% endblock %}

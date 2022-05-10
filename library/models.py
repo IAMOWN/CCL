@@ -11,6 +11,14 @@ def current_year():
     return date.today().year
 
 
+# ####################### CHOICE CONSTANTS #######################
+LIBRARY_RECORD_TYPE = [
+    ('Discourse', 'Discourse'),
+    ('Book', 'Book'),
+    ('Cosmic Review', 'Cosmic Review'),
+]
+
+
 # ####################### Cosmic Author #######################
 class CosmicAuthor(models.Model):
     """Cosmic Authors are associated with library records."""
@@ -63,14 +71,6 @@ class Tag(models.Model):
 
     def get_absolute_url(self):
         return reverse('tag', kwargs={'pk': self.pk})
-
-
-# ####################### CHOICE CONSTANTS #######################
-LIBRARY_RECORD_TYPE = [
-    ('Discourse', 'Discourse'),
-    ('Book', 'Book'),
-    ('Cosmic Review', 'Cosmic Review'),
-]
 
 
 # ####################### Library Record #######################

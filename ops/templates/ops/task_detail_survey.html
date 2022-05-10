@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {{ task.task_title }}
+{% endblock %}
+{% block content %}
+    {% if messages %}
+        <section>
+            <div>
+                <p class="alert-{{ message.tags }}">
+                    {{ message }}
+                </p>
+            </div>
+        </section>
+    {% endif %}
+    <section class="media content-section">
+        <div class="row">
+            <div class="col">
+                {% if task.task_status != 'Completed' %}
+                    <h3><strong>{{ task.task_title }}</strong> <a href="{% url 'task-update-survey' task.id %}" class="text-success"><i class="far fa-plus-square h5-plus"></i></a></h3>
+                {% else %}
+                    <h3><strong>{{ task.task_title }}</strong></h3>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <section class="media content-section">
+        <div class="row">
+            <div class="col">
+                <p><strong>Satisfaction Rating: </strong>{{ task.response_satisfaction }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p><strong>Comments:</strong></p>
+                {{ task.response_comments }}
+            </div>
+        </div>
+        <div class="col pb-2 pt-4">
+            {% if task.assigned_user == user %}
+                <a href="{% url 'tasks' %}" class="btn btn-outline-BlueGray">Go Back to Tasks</a>
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load index %}
 {% block title %}
     {{ title }}
 {% endblock %}
@@ -47,12 +48,13 @@
     <section class="media content-section text-CCL-Gold pb-4">
         <div class="row pt-2">
             <div class="col-sm-12">
-                <h5><strong>Objectives</strong></h5>
+                <h5><strong>Active Objectives</strong></h5>
             </div>
         </div>
         {% for objective in objectives %}
             <span class="list-group-item list-group-item-light pb-2 pt-2 {% cycle 'row1' 'row2' %}">
-            <a class="text-CCL-Blue" href="{% url 'objective' objective.id %}"><strong>{{ objective.objective }}</strong></a>
+                <a class="text-CCL-Blue" href="{% url 'objective' objective.id %}"><strong>{{ objective.objective }}</strong></a><br>
+                <span class="small">Objective status: {{ objective.objective_status }}</span>
             </span>
         {% endfor %}
         <div class="row">
