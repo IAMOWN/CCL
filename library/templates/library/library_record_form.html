@@ -130,37 +130,37 @@
             </div>
             <div class="row pt-4">
                 {% if page_type == 'Update' %}
-                <div class="col-sm-2 pb-2 pt-2">
+                <div class="col-sm-2 pt-2">
                     <a href="{% url 'library-record' libraryrecord.id %}" class="btn btn-outline-CCL-Blue col-sm-12">Go Back</a>
                 </div>
-                <div class="col-sm-2 pb-2 pt-2">
+                <div class="col-sm-2 pt-2">
                     <a class="btn btn-outline-CCL-Blue col-12" href="{% url 'discourse-series-create' %}">Add A Series Title</a>
                 </div>
-                <div class="col-sm-2 pb-2 pt-2">
+                <div class="col-sm-2 pt-2">
                     <a class="btn btn-outline-CCL-Blue col-12" href="{% url 'author-create' %}">Add An Author</a>
                 </div>
-                <div class="col-sm-2 pb-2 pt-2">
+                <div class="col-sm-2 pt-2">
                     <a class="btn btn-outline-CCL-Blue col-12" href="{% url 'tag-create' %}">Add A Tag</a>
                 </div>
-                <div class="col-sm-2 pb-2 pt-2"></div>
-                <div class="col-sm-2 pb-2 pt-2">
+                <div class="col-sm-2 pt-2"></div>
+                <div class="col-sm-2 pt-2">
                     <input type="submit" value="Update Library Record" class="btn btn-CCL-Blue col-sm-12">
                 </div>
                 {% else %}
-                <div class="col-sm-2 pb-2 pt-2">
-                    <a href="{% url 'library-records' %}" class="btn btn-outline-CCL-Blue col-sm-2">Go Back</a>
+                <div class="col-sm-2 pt-2">
+                    <a href="{% url 'library-records' %}" class="btn btn-outline-CCL-Blue col-sm-12">Go Back</a>
                 </div>
-                <div class="col-sm-2 pb-2 pt-2">
+                <div class="col-sm-2 pt-2">
                     <a class="btn btn-outline-CCL-Blue col-12" href="{% url 'discourse-series-create' %}">Add A Series Title</a>
                 </div>
-                <div class="col-sm-2 pb-2 pt-2">
+                <div class="col-sm-2 pt-2">
                     <a class="btn btn-outline-CCL-Blue col-12" href="{% url 'author-create' %}">Add An Author</a>
                 </div>
-                <div class="col-sm-2 pb-2 pt-2">
+                <div class="col-sm-2 pt-2">
                     <a class="btn btn-outline-CCL-Blue col-12" href="{% url 'tag-create' %}">Add A Tag</a>
                 </div>
-                <div class="col-sm-2 pb-2 pt-2"></div>
-                <div class="col-sm-2 pb-2 pt-2">
+                <div class="col-sm-2 pt-2"></div>
+                <div class="col-sm-2 pt-2">
                     <input type="submit" value="Add Library Record" class="btn btn-CCL-Blue col-sm-12">
                 </div>
                 {% endif %}
